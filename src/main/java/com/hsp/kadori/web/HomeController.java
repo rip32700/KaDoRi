@@ -1,13 +1,14 @@
-package com.hsp.kadori;
+package com.hsp.kadori.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HelloController {
+public class HomeController {
 
 	@RequestMapping(value="/")
 	public String home() {
 		return "home";
 	}
+	
 }
