@@ -1,0 +1,1 @@
+Copyright &copy; Philipp Rieger 2015
