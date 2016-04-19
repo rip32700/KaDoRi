@@ -1,12 +1,17 @@
-<h1>Lorem ipsum dolor sit amet</h1>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<h1>Posts:</h1>
+<br>
 <p>
-	Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
-	tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At 
-	vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, 
-	no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, 
-	consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et 
-	dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo 
-	duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est 
-	Lorem ipsum dolor sit amet.
+	<ul class="posts-list">
+		<c:forEach items="${postsList}" var="post">
+			<li>
+				<div class="post-title"><c:out value="${post.title}"></c:out><br></div>
+				<c:out value="${post.message}"></c:out><br>
+				<div class="post-author">By <c:out value="${post.author.username}"></c:out></div>
+			</li>
+		</c:forEach>
+	</ul>
 </p>
+
 

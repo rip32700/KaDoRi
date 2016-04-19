@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-custom navbar-fixed-top">
 	<div class="container">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed"
@@ -10,14 +10,19 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Project name</a>
+			<a class="navbar-brand" href="#">KaDoRi</a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#about">About</a></li>
-				<li><a href="#contact">Contact</a></li>
+				<li><a href="#about">My Profile</a></li>
+				<li><a href="#about">New Post</a></li>
+				<li><a href="#contact">My Friends</a></li>
 			</ul>
+			<ul class="nav navbar-nav navbar-right">
+			<li><a href="#about">Settings</a></li>
+			<li><a href="#contact">Log Out</a></li>
+		</ul>
 		</div>
 		<!--/.nav-collapse -->
 	</div>
