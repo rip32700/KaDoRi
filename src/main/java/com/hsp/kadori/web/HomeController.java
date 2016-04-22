@@ -27,7 +27,7 @@ public class HomeController {
 		User aUser = new User("rip32700");
 		Post aPost = new Post(aUser, LocalDate.now(), LocalDate.now(), "First Post", "Hello World Post.");
 		
-		User anotherUser = new User("kaa3333");
+		User anotherUser = new User("kaa33477");
 		Post anotherPost = new Post(anotherUser, LocalDate.now(), LocalDate.now(), "Another Test Post", "With some random text.");
 		
 		posts.add(aPost);
