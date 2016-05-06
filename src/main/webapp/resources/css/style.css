@@ -20,6 +20,7 @@
 
 .post-creation {
 	font-size: 0.75em;
+	margin-bottom: 3px;
 }
 
 .post-title {
@@ -29,7 +30,9 @@
 	background-color: #f8bb5d;
 	margin-left: -10px;
 	margin-right: -10px;
-	padding: 10px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 .post-author {
 	margin-top: 5px;
