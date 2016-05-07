@@ -1,5 +1,16 @@
 @CHARSET "UTF-8";
 
+.registration-form-label {
+	margin-top: 20px;
+	margin-right: 20px;
+	width: 150px;
+	text-align: left;
+}
+
+.registration-form-input-field {
+	width: 220px !important;
+}
+
 .posts-list {
 	list-style-type: none;
 }

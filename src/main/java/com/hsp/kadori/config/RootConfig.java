@@ -6,11 +6,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.hsp.kadori.dao.UserDao;
 import com.hsp.kadori.dao.impl.UserDaoImpl;
 import com.hsp.kadori.service.PostService;
+import com.hsp.kadori.service.UserService;
+import com.hsp.kadori.service.impl.MyUserDetailsService;
 import com.hsp.kadori.service.impl.PostServiceImpl;
+import com.hsp.kadori.service.impl.UserServiceImpl;
 
 @Configuration
 public class RootConfig {
@@ -39,6 +43,16 @@ public class RootConfig {
 	@Bean
 	public PostService postService() {
 		return new PostServiceImpl();
+	}
+	
+	@Bean
+	public UserService userService() {
+		return new UserServiceImpl();
+	}
+	
+	@Bean
+	public UserDetailsService userDetailsService() {
+		return new MyUserDetailsService();
 	}
 	
 }

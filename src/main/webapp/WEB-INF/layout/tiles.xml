@@ -41,4 +41,16 @@
  		<put-attribute name="body" value="/WEB-INF/views/admin.jsp" />
  	</definition>
  	
+ 	<definition name="registrationSuccess" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/registrationSuccess.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="registration" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/registration.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="accessDenied" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/accessDenied.jsp" />
+ 	</definition>
+ 	
  </tiles-definitions>

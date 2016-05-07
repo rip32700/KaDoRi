@@ -11,6 +11,11 @@
 	<!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.min.css" />" />
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/starter-template.css" />" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/font-awesome.css" />" />
+    <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    
+    <!-- icons -->
+	<link rel="stylesheet"	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 <body>
 	<div id="header">
