@@ -15,7 +15,7 @@ import com.hsp.kadori.domain.User;
 
 public class UserDaoImpl implements UserDao {
 
-	private static final String USER_URI_V1 = "http://localhost:8585/user/";
+	private static final String USER_URI_V1 = "http://localhost:8181/user/";
     private RestTemplate restTemplate = new RestTemplate();
 	
 	@Inject
