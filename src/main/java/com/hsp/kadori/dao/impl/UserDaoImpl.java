@@ -13,6 +13,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.boot.test.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -34,7 +35,7 @@ import scala.annotation.meta.setter;
 public class UserDaoImpl implements UserDao {
 
 	private static final String USER_URI_V1 = "http://localhost:8181/user/";
-    private RestTemplate restTemplate = new RestTemplate();
+    private TestRestTemplate restTemplate = new TestRestTemplate("kaa3333", "123test");
     
     @Inject
     private MyUserDetailsService userDetailsService;
@@ -49,36 +50,36 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<User> findAllUsers() {
-		RestTemplateFactory factory = new RestTemplateFactory();
-		try {
-			factory.afterPropertiesSet();
-			restTemplate = factory.getObject();
-			ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
-			
-			if(requestFactory instanceof HttpComponentsClientHttpRequestFactory) {
-				HttpComponentsClientHttpRequestFactory requestFactory2 = (HttpComponentsClientHttpRequestFactory) requestFactory;
-				HttpClient httpClient2 = requestFactory2.getHttpClient();
-				DefaultHttpClient httpClient = (DefaultHttpClient) requestFactory2.getHttpClient();
-				HttpHost host = new HttpHost("localhost", 8383, "http");
-				httpClient.getCredentialsProvider().setCredentials(new AuthScope(host), new UsernamePasswordCredentials("kaa3333", "123test"));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		RestTemplateFactory factory = new RestTemplateFactory();
+//		try {
+//			factory.afterPropertiesSet();
+//			restTemplate = factory.getObject();
+//			ClientHttpRequestFactory requestFactory = restTemplate.getRequestFactory();
+//			
+//			if(requestFactory instanceof HttpComponentsClientHttpRequestFactory) {
+//				HttpComponentsClientHttpRequestFactory requestFactory2 = (HttpComponentsClientHttpRequestFactory) requestFactory;
+//				HttpClient httpClient2 = requestFactory2.getHttpClient();
+//				DefaultHttpClient httpClient = (DefaultHttpClient) requestFactory2.getHttpClient();
+//				HttpHost host = new HttpHost("localhost", 8383, "http");
+//				httpClient.getCredentialsProvider().setCredentials(new AuthScope(host), new UsernamePasswordCredentials("kaa3333", "123test"));
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
 		
-//		String plainCreds = "kaa3333:123test";
-//		byte[] plainCredsBytes = plainCreds.getBytes();
-//		byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
-//		String base64Creds = new String(base64CredsBytes);
-//		HttpHeaders headers = new HttpHeaders();
-////		headers.add("Authorization", "Bascic "+base64Creds);
-//		
-//		
-//		byte[] encodedAuth = Base64.encodeBase64(plainCreds.getBytes(Charset.forName("US-ASCII")) );
-//		String authHeader = "Basic " + new String( encodedAuth );
-//		headers.set("Authorization", authHeader);
-//		HttpEntity<HttpHeaders> request = new HttpEntity<HttpHeaders>(headers);
+		String plainCreds = "kaa3333:123test";
+		byte[] plainCredsBytes = plainCreds.getBytes();
+		byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
+		String base64Creds = new String(base64CredsBytes);
+		HttpHeaders headers = new HttpHeaders();
+//		headers.add("Authorization", "Bascic "+base64Creds);
+		
+		
+		//byte[] encodedAuth = Base64.encodeBase64(plainCreds.getBytes(Charset.forName("US-ASCII")) );
+		//String authHeader = "Basic " + new String( encodedAuth );
+		headers.add("Authorization", "Bascic "+base64Creds);
+		HttpEntity<HttpHeaders> request = new HttpEntity<HttpHeaders>(headers);
 		
 		
 		ResponseEntity<User[]> respone = restTemplate.exchange(USER_URI_V1 + "/all", HttpMethod.GET, null, User[].class);
