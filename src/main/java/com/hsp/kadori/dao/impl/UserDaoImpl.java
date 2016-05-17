@@ -35,7 +35,7 @@ import scala.annotation.meta.setter;
 public class UserDaoImpl implements UserDao {
 
 	private static final String USER_URI_V1 = "http://localhost:8181/user/";
-    private TestRestTemplate restTemplate = new TestRestTemplate("kaa3333", "123test");
+    private RestTemplate restTemplate = new RestTemplate();
     
     @Inject
     private MyUserDetailsService userDetailsService;
@@ -73,16 +73,14 @@ public class UserDaoImpl implements UserDao {
 		byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
 		String base64Creds = new String(base64CredsBytes);
 		HttpHeaders headers = new HttpHeaders();
-//		headers.add("Authorization", "Bascic "+base64Creds);
-		
 		
 		//byte[] encodedAuth = Base64.encodeBase64(plainCreds.getBytes(Charset.forName("US-ASCII")) );
 		//String authHeader = "Basic " + new String( encodedAuth );
-		headers.add("Authorization", "Bascic "+base64Creds);
-		HttpEntity<HttpHeaders> request = new HttpEntity<HttpHeaders>(headers);
+		headers.add("Authorization", "Basic "+base64Creds);
+		HttpEntity<String> request = new HttpEntity<String>(headers);
 		
 		
-		ResponseEntity<User[]> respone = restTemplate.exchange(USER_URI_V1 + "/all", HttpMethod.GET, null, User[].class);
+		ResponseEntity<User[]> respone = restTemplate.exchange(USER_URI_V1 + "/all", HttpMethod.GET, request, User[].class);
 		User[] userArray = respone.getBody();
 //		User[] userArray = restTemplate.getForObject(USER_URI_V1 + "/all", User[].class);
 		List<User> userList = Arrays.asList(userArray);
