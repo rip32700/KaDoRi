@@ -1,57 +1,69 @@
 package com.hsp.kadori.domain;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class Post {
-
-	private User author;
-	private LocalDate creationDate;
-	private LocalDate lastModified;
-	private String title;
-	private String message;
 	
-	public Post() {
-		
-	}
+	private Long postId;
+	private String content;
+	private Date creationTime;
+	private Group group;
+	private User user;
 	
-	public Post(User author, LocalDate creationDate, LocalDate lastModified, String title, String message) {
+	public Post (Long postId, String content, Date creationTime, User user) {
 		super();
-		this.author = author;
-		this.creationDate = creationDate;
-		this.lastModified = lastModified;
-		this.title = title;
-		this.message = message;
+		this.postId = postId;
+		this.content = content;
+		this.creationTime = creationTime;
+		this.user = user;
 	}
 	
-	public User getAuthor() {
-		return author;
-	}
-	public void setAuthor(User author) {
-		this.author = author;
-	}
-	public LocalDate getCreationDate() {
-		return creationDate;
-	}
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
-	}
-	public LocalDate getLastModified() {
-		return lastModified;
-	}
-	public void setLastModified(LocalDate lastModified) {
-		this.lastModified = lastModified;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
+	public Post (Long postId, String content, Date creationTime, Group group, User user) {
+		super();
+		this.postId = postId;
+		this.content = content;
+		this.creationTime = creationTime;
+		this.group = group;
+		this.user = user;
 	}
 	
+	public Long getPostId() {
+		return postId;
+	}
+	
+	public void setPostId(Long postId) {
+		this.postId = postId;
+	}
+	
+	public String getContent() {
+		return content;
+	}
+	
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	public Date getCreationTime() {
+		return creationTime;
+	}
+	
+	public void setCreationTime(Date creationTime) {
+		this.creationTime = creationTime;
+	}
+	
+	public Group getGroup() {
+		return group;
+	}
+	
+	public void setGroup(Group group) {
+		this.group = group;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

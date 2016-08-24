@@ -24,7 +24,7 @@ public class HomeController {
 	
 	public HomeController() {
 		// dummy data
-		User aUser = new User();
+		/*User aUser = new User();
 		aUser.setUsername("rip32700");
 		Post aPost = new Post(aUser, LocalDate.now(), LocalDate.now(), "First Post", "Hello World Post.");
 		
@@ -33,7 +33,7 @@ public class HomeController {
 		Post anotherPost = new Post(anotherUser, LocalDate.now(), LocalDate.now(), "Another Test Post", "With some random text.");
 		
 		posts.add(aPost);
-		posts.add(anotherPost);
+		posts.add(anotherPost);*/
 	}
 	
 	@RequestMapping(value="/")
