@@ -19,6 +19,12 @@
 	text-align: justify;
 }
 
+.post-button {
+	margin-top: 3px;
+	align: right;
+	float: right;
+}
+
 .post-box {
 	background-color: #fad193;
 	margin: auto;

@@ -10,6 +10,10 @@ public class Post {
 	private Group group;
 	private User user;
 	
+	public Post() {
+		
+	}
+	
 	public Post (Long postId, String content, Date creationTime, User user) {
 		super();
 		this.postId = postId;
