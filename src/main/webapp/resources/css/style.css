@@ -25,6 +25,10 @@
 	float: right;
 }
 
+.post-content {
+	white-space: pre-wrap;
+}
+
 .post-box {
 	background-color: #fad193;
 	margin: auto;

@@ -23,7 +23,7 @@
 				<div class="post-box">
 					<div class="post-creation"><c:out value="${post.creationTime}:"></c:out></div>
 					<%-- <div class="post-title"><c:out value="${post.title}"></c:out><br></div> --%>
-					<c:out value="${post.content}"></c:out><br>
+					<div class="post-content"><c:out value="${post.content}"></c:out><br></div>
 					<div class="post-author">By <c:out value="${post.user.username}"></c:out></div>
 				</div>
 			</li>

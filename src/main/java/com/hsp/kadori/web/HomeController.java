@@ -7,6 +7,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,7 +34,7 @@ public class HomeController {
 	public HomeController() {
 	}
 	
-	@RequestMapping(value="/")//, method = RequestMethod.POST)
+	@RequestMapping(value="/")
 	public String home(final Model model) {
 		model.addAttribute("postsList", posts);
 		model.addAttribute("postDTO", new Post());
@@ -42,15 +44,15 @@ public class HomeController {
 	
 	@RequestMapping(value="/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
-		User anotherUser = new User();
-		anotherUser.setUsername("kaa33477");
-		Date date = new Date();
-		
+		User user = new User();
 		Post newPost = new Post();
 		
+		String username = getCurrentUserName();
+		user.setUsername(username);
+		
 		if (!result.hasErrors()) {
-			post.setUser(anotherUser);
-			post.setCreationTime(date);
+			post.setUser(user);
+			post.setCreationTime(new Date());
 			newPost = service.addNewPost(post);
 			posts.add(0, newPost);
 	    }
@@ -59,6 +61,17 @@ public class HomeController {
 	    } else {
 	        return new ModelAndView("home", "postsList", posts);
 	    }
+	}
+
+	private String getCurrentUserName() {
+		String username="";
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails)principal).getUsername();
+		} else {
+			username = principal.toString();
+		}
+		return username;
 	}
 	
 }
