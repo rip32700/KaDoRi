@@ -25,11 +25,11 @@ public class PostDaoImpl implements PostDao {
 	
 	@Override
 	public Post save(Post post) {
-		restTemplate.exchange(POST_URI_V1, HttpMethod.POST, request,
-				Post[].class, post);
+//		restTemplate.exchange(POST_URI_V1, HttpMethod.POST, request,
+//				Post[].class, post);
 //		restTemplate.postForLocation(POST_URI_V1, post);
 		// TODO Auto-generated method stub
-		return null;
+		return post;
 	}
 
 	@Override

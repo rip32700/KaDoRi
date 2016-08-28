@@ -25,27 +25,16 @@ import com.hsp.kadori.service.PostService;
 public class HomeController {
 
 	private List<Post> posts = new ArrayList<>();
-//	private static int counter = 0;
 	
 	@Inject
 	PostService service;
 	
 	public HomeController() {
-		// dummy data
-		/*User aUser = new User();
-		aUser.setUsername("rip32700");
-		Post aPost = new Post(aUser, LocalDate.now(), LocalDate.now(), "First Post", "Hello World Post.");
-		
-		User anotherUser = new User();
-		anotherUser.setUsername("kaa33477");
-		Post anotherPost = new Post(anotherUser, LocalDate.now(), LocalDate.now(), "Another Test Post", "With some random text.");
-		
-		posts.add(aPost);
-		posts.add(anotherPost);*/
 	}
 	
 	@RequestMapping(value="/")//, method = RequestMethod.POST)
 	public String home(final Model model) {
+		model.addAttribute("postsList", posts);
 		model.addAttribute("postDTO", new Post());
 
 		return "home";
@@ -53,9 +42,6 @@ public class HomeController {
 	
 	@RequestMapping(value="/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
-//		counter++;
-//		Post anotherPost = new Post(1l, "Test "+counter, date, anotherUser);
-//		posts.add(anotherPost);
 		User anotherUser = new User();
 		anotherUser.setUsername("kaa33477");
 		Date date = new Date();
@@ -66,12 +52,12 @@ public class HomeController {
 			post.setUser(anotherUser);
 			post.setCreationTime(date);
 			newPost = service.addNewPost(post);
-			posts.add(newPost);
+			posts.add(0, newPost);
 	    }
 	    if (result.hasErrors()) {
-	        return new ModelAndView("newPost", "postDTO", post);
+	        return null; //TODO
 	    } else {
-	        return new ModelAndView("home", "postDTO", post);
+	        return new ModelAndView("home", "postsList", posts);
 	    }
 	}
 	
