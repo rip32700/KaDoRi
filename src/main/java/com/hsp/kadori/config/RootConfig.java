@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.hsp.kadori.dao.PostDao;
 import com.hsp.kadori.dao.UserDao;
+import com.hsp.kadori.dao.impl.PostDaoImpl;
 import com.hsp.kadori.dao.impl.UserDaoImpl;
 import com.hsp.kadori.service.PostService;
 import com.hsp.kadori.service.UserService;
@@ -37,6 +39,9 @@ public class RootConfig {
 		return new JdbcTemplate(dataSource);
 	}
 	
+	@Bean PostDao postDao() {
+		return new PostDaoImpl();
+	}
 	
 	@Bean
 	public UserDao userDao() {

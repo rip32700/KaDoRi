@@ -1,14 +1,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ page session="false"%>
+
 <h1>New Post:</h1>
-<form action="/new_Post" modelAttribute="post" method="post" class="form-horizontal">
+<form:form action="/new_Post" modelAttribute="postDTO" method="post" class="form-horizontal">
 	<div class="form-group">
-	  <textarea class="form-control" rows="5" id="newPost"></textarea>
+		<form:textarea class="form-control" rows="7" id="newPost" path="content" value="" placeholder="Enter your new Post..."/>
 		<div class="post-button">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="submit" class="btn btn-warning" value="Post">
 		</div>
 	</div>
-</form> 
+</form:form> 
 <br>
 <h1>Posts:</h1>
 <br>
