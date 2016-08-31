@@ -1,11 +1,13 @@
 package com.hsp.kadori.dao.impl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,21 +29,22 @@ public class PostDaoImpl implements PostDao {
 	public Post save(Post post) {
 //		restTemplate.exchange(POST_URI_V1, HttpMethod.POST, request,
 //				Post[].class, post);
-//		restTemplate.postForLocation(POST_URI_V1, post);
-		// TODO Auto-generated method stub
+		restTemplate.postForLocation(POST_URI_V1, post);
 		return post;
 	}
 
 	@Override
 	public List<Post> getPostsOfFriends(User me) {
-		// TODO Auto-generated method stub
+		// TODO implement
 		return null;
 	}
 
 	@Override
 	public List<Post> getPublicPosts() {
-		// TODO Auto-generated method stub
-		return null;
+		ResponseEntity<Post[]> respone = restTemplate.exchange(POST_URI_V1 + "/all_Public", HttpMethod.GET, request,
+				Post[].class);
+		List<Post> postList = Arrays.asList(respone.getBody());
+		return postList;
 	}
 
 }

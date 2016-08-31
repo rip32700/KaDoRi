@@ -17,6 +17,7 @@ public class PostServiceImpl implements PostService {
 		newPost.setContent(post.getContent());
 		newPost.setCreationTime(post.getCreationTime());
 		newPost.setUser(post.getUser());
+		newPost.setIsPublic(post.getIsPublic());
 		
 		return repository.save(newPost);
 	}

@@ -34,7 +34,7 @@ public class MyUserDetailsService implements UserDetailsService {
         boolean credentialsNonExpired = true;
         boolean accountNonLocked = true;
         return  new org.springframework.security.core.userdetails.User
-          (user.getEmail(), 
+          (user.getUsername(), 
           user.getPassword().toLowerCase(), enabled, accountNonExpired, credentialsNonExpired, 
             accountNonLocked, getAuthorities(user.getRole()));
 	}

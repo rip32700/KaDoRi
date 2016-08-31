@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.hsp.kadori.dao.PostDao;
+import com.hsp.kadori.dao.UserDao;
 import com.hsp.kadori.domain.Post;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.PostDTO;
@@ -31,28 +33,44 @@ public class HomeController {
 	@Inject
 	PostService service;
 	
+	@Inject
+	UserDao userRepository;
+	@Inject
+	PostDao postRepository;
+	
 	public HomeController() {
 	}
 	
 	@RequestMapping(value="/")
 	public String home(final Model model) {
+		List<Post> publicPosts = postRepository.getPublicPosts();
+		if(publicPosts != null) {
+			for (Post post : publicPosts) {
+				if(post != null) {
+					if(!posts.contains(post)) {
+						posts.add(0, post);
+					}
+				}
+			}
+		}
+
 		model.addAttribute("postsList", posts);
 		model.addAttribute("postDTO", new Post());
-
+		
 		return "home";
 	}
 	
 	@RequestMapping(value="/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
-		User user = new User();
 		Post newPost = new Post();
 		
 		String username = getCurrentUserName();
-		user.setUsername(username);
+		User user = userRepository.findByUsername(username);
 		
-		if (!result.hasErrors()) {
+		if (!result.hasErrors() && user != null) {
 			post.setUser(user);
 			post.setCreationTime(new Date());
+			post.setIsPublic(true); //TODO: add mechanism to check/uncheck public
 			newPost = service.addNewPost(post);
 			posts.add(0, newPost);
 	    }

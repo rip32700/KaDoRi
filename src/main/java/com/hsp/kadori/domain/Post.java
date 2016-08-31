@@ -8,25 +8,28 @@ public class Post {
 	private String content;
 	private Date creationTime;
 	private Group group;
+	private boolean isPublic;
 	private User user;
 	
 	public Post() {
 		
 	}
 	
-	public Post (Long postId, String content, Date creationTime, User user) {
+	public Post (Long postId, String content, Date creationTime, boolean isPublic, User user) {
 		super();
 		this.postId = postId;
 		this.content = content;
 		this.creationTime = creationTime;
+		this.isPublic = isPublic;
 		this.user = user;
 	}
 	
-	public Post (Long postId, String content, Date creationTime, Group group, User user) {
+	public Post (Long postId, String content, Date creationTime, boolean isPublic, Group group, User user) {
 		super();
 		this.postId = postId;
 		this.content = content;
 		this.creationTime = creationTime;
+		this.isPublic = isPublic;
 		this.group = group;
 		this.user = user;
 	}
@@ -69,5 +72,13 @@ public class Post {
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public boolean getIsPublic() {
+		return isPublic;
+	}
+
+	public void setIsPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 }

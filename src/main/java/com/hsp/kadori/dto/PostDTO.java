@@ -9,6 +9,8 @@ public class PostDTO {
 	private Long postId;
 	private String content;
 	private Date creationTime;
+	private boolean isPublic;
+
 	private Group group;
 	private User user;
 	
@@ -16,19 +18,21 @@ public class PostDTO {
 		
 	}
 	
-	public PostDTO (Long postId, String content, Date creationTime, User user) {
+	public PostDTO (Long postId, String content, Date creationTime, boolean isPublic, User user) {
 		super();
 		this.postId = postId;
 		this.content = content;
 		this.creationTime = creationTime;
+		this.isPublic = isPublic;
 		this.user = user;
 	}
 	
-	public PostDTO (Long postId, String content, Date creationTime, Group group, User user) {
+	public PostDTO (Long postId, String content, Date creationTime, boolean isPublic, Group group, User user) {
 		super();
 		this.postId = postId;
 		this.content = content;
 		this.creationTime = creationTime;
+		this.isPublic = isPublic;
 		this.group = group;
 		this.user = user;
 	}
@@ -71,5 +75,13 @@ public class PostDTO {
 	
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public boolean getIsPublic() {
+		return isPublic;
+	}
+
+	public void setIsPublic(boolean isPublic) {
+		this.isPublic = isPublic;
 	}
 }

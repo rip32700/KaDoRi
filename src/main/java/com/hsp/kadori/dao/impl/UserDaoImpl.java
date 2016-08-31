@@ -20,9 +20,6 @@ public class UserDaoImpl implements UserDao {
 	private RestTemplate restTemplate = new RestTemplate();
 
 	@Inject
-	JdbcOperations jdbcOperations;
-
-	@Inject
 	HttpEntity<String> request;
 
 	@Override
