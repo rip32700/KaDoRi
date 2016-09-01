@@ -1,4 +1,4 @@
-package com.hsp.kadori.web.utils;
+package com.hsp.kadori.service.utils;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

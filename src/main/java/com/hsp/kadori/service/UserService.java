@@ -9,5 +9,6 @@ import com.hsp.kadori.dto.UserDTO;
 public interface UserService {
 
 	User registerNewUserAccount(final UserDTO user);
+	User getLoggedInUser();
 	
 }

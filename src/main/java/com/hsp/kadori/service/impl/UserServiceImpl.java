@@ -9,6 +9,7 @@ import com.hsp.kadori.dto.UserDTO;
 import com.hsp.kadori.exceptions.EmailExistsException;
 import com.hsp.kadori.exceptions.UsernameExistsException;
 import com.hsp.kadori.service.UserService;
+import com.hsp.kadori.service.utils.UserUtils;
 
 public class UserServiceImpl implements UserService {
 
@@ -57,6 +58,12 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+	}
+
+	@Override
+	public User getLoggedInUser() {
+		String currentUserName = UserUtils.getCurrentUserName();
+		return repository.findByUsername(currentUserName);
 	}
 
 }

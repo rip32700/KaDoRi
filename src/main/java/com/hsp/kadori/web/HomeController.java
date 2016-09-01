@@ -7,8 +7,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,13 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hsp.kadori.dao.PostDao;
-import com.hsp.kadori.dao.UserDao;
 import com.hsp.kadori.domain.Post;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.PostDTO;
 import com.hsp.kadori.service.PostService;
-import com.hsp.kadori.web.utils.UserUtils;
+import com.hsp.kadori.service.UserService;
 
 @Controller
 public class HomeController {
@@ -32,29 +28,19 @@ public class HomeController {
 	private List<Post> posts = new ArrayList<>();
 	
 	@Inject
-	PostService service;
+	PostService postService;
 	
 	@Inject
-	UserDao userRepository;
-	@Inject
-	PostDao postRepository;
+	UserService userService;
 	
 	public HomeController() {
 	}
 	
 	@RequestMapping(value="/")
 	public String home(final Model model) {
-		List<Post> publicPosts = postRepository.getPublicPosts();
-		if(publicPosts != null) {
-			for (Post post : publicPosts) {
-				if(post != null) {
-					if(!posts.contains(post)) {
-						posts.add(0, post);
-					}
-				}
-			}
-		}
-
+		User user = userService.getLoggedInUser();
+		posts = postService.getPosts(user);
+		
 		model.addAttribute("postsList", posts);
 		model.addAttribute("postDTO", new Post());
 		
@@ -63,17 +49,17 @@ public class HomeController {
 	
 	@RequestMapping(value="/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
-		Post newPost = new Post();
-		
-		String username = UserUtils.getCurrentUserName();
-		User user = userRepository.findByUsername(username);
+		User user = userService.getLoggedInUser();
 		
 		if (!result.hasErrors() && user != null) {
 			post.setUser(user);
 			post.setCreationTime(new Date());
 			post.setIsPublic(true); //TODO: add mechanism to check/uncheck public
-			newPost = service.addNewPost(post);
-			posts.add(0, newPost);
+			Post newPost = postService.addNewPost(post);
+			
+			if(newPost != null) {
+				posts.add(0, newPost);
+			}
 	    }
 	    if (result.hasErrors()) {
 	        return null; //TODO

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.hsp.kadori.dao.UserDao;
 import com.hsp.kadori.domain.User;
-import com.hsp.kadori.web.utils.UserUtils;
+import com.hsp.kadori.service.utils.UserUtils;
 
 @Controller
 public class ProfileController {
