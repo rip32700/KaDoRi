@@ -34,6 +34,21 @@ public class Post {
 		this.user = user;
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Post) {
+			Post otherPost = (Post) obj;
+			if(this.user.getUsername().equals(otherPost.getUser().getUsername())) {
+				if(this.creationTime.equals(otherPost.getCreationTime())) {
+					if(this.content.equals(otherPost.getContent())) {
+						return true;
+					}
+				}
+			}
+		}
+		return super.equals(obj);
+	}
+	
 	public Long getPostId() {
 		return postId;
 	}

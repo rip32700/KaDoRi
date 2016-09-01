@@ -3,8 +3,8 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-		   <div class="panel-heading">
-		     <h3 class="panel-title">Welcome to your Profile ${currentUser.firstname} ${currentUser.lastname} </h3>
+		   <div class="panel-heading table-header">
+		     <h2 class="panel-title">Welcome to your Profile ${currentUser.firstname} ${currentUser.lastname} </h2>
 		   </div>
 		   <br/>
 		   <div class="panel-body">
