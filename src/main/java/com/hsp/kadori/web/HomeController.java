@@ -24,6 +24,7 @@ import com.hsp.kadori.domain.Post;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.PostDTO;
 import com.hsp.kadori.service.PostService;
+import com.hsp.kadori.web.utils.UserUtils;
 
 @Controller
 public class HomeController {
@@ -64,7 +65,7 @@ public class HomeController {
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
 		Post newPost = new Post();
 		
-		String username = getCurrentUserName();
+		String username = UserUtils.getCurrentUserName();
 		User user = userRepository.findByUsername(username);
 		
 		if (!result.hasErrors() && user != null) {
@@ -79,17 +80,5 @@ public class HomeController {
 	    } else {
 	        return new ModelAndView("home", "postsList", posts);
 	    }
-	}
-
-	private String getCurrentUserName() {
-		String username="";
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (principal instanceof UserDetails) {
-			username = ((UserDetails)principal).getUsername();
-		} else {
-			username = principal.toString();
-		}
-		return username;
-	}
-	
+	}	
 }

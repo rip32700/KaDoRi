@@ -16,13 +16,13 @@
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li>
-				<li><a href="#about">My Profile</a></li>
-				<li><a href="#about">New Post</a></li>
-				<li><a href="#contact">My Friends</a></li>
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="<c:url value="/my_friends" />">My Friends</a></li>
+				</sec:authorize>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value="/profile" />">Profile</a></li>
+					<li><a href="<c:url value="/my_profile" />">Profile</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAnonymous()">
 					<li><a href="<c:url value="/register" />">Sign up</a></li>
