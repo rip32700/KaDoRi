@@ -44,7 +44,11 @@
 		               </tbody>
 		             </table>
 		           </div>
-		         </div>
+		       </div>
+		       <div class="row">
+		       		<input type="button"  onclick="location.href='/edit_profile'" value="Edit Data" >
+		       		<%-- <a href="<c:url value="/edit_profile" />">Edit Data</a> --%>
+		       </div>
 			</div> 
 		</div>
 	</div>

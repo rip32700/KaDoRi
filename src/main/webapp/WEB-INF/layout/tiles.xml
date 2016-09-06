@@ -29,6 +29,10 @@
  		<put-attribute name="body" value="/WEB-INF/views/my_profile.jsp" />
  	</definition>
  	
+ 	<definition name="edit_profile" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/edit_profile.jsp" />
+ 	</definition>
+ 	
  	<definition name="new_post" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/new_post.jsp" />
  	</definition>

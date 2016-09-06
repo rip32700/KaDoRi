@@ -43,6 +43,33 @@ public class UserServiceImpl implements UserService {
         
         return repository.save(newUser); 
 	}
+	
+	@Override
+	public User updateUserAccount(UserDTO userDto) {
+		User user = repository.findUserById(userDto.getUserId());
+		
+		if (!user.getEmail().equals(userDto.getEmail()) && emailExists(userDto.getEmail())) {   
+            throw new EmailExistsException("There is an account with that email address: "+ user.getEmail());
+        }
+		
+		if (!user.getUsername().equals(userDto.getUsername()) && usernameExists(userDto.getUsername())) {   
+            throw new UsernameExistsException("There is an account with that username address: "+ user.getUsername());
+        }
+		
+		user.setFirstname(userDto.getFirstName());
+		user.setLastname(userDto.getLastName());
+		user.setUsername(userDto.getUsername());
+		user.setPassword(userDto.getPassword());
+		user.setEmail(userDto.getEmail());
+		user.setStreet(userDto.getStreet());
+		user.setStreetNumber(userDto.getStreetNumber());
+        user.setCity(userDto.getCity());
+        user.setZip(userDto.getZip());
+        user.setType(userDto.getType());
+        user.setBirthday(userDto.getBirthday());
+        
+        return repository.save(user);
+	}
 
 	private boolean emailExists(String email) {
 		User user = repository.findByEmail(email);

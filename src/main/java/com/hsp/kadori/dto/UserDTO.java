@@ -6,6 +6,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class UserDTO {
 
+	private Long userId;
+	
 	@NotNull
 	@NotEmpty
 	private String firstName;
@@ -59,6 +61,25 @@ public class UserDTO {
 			String matchingPassword, String type, String birthday, String street, Integer streetNumber, String city,
 			Integer zip) {
 		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.matchingPassword = matchingPassword;
+		this.type = type;
+		this.birthday = birthday;
+		this.street = street;
+		this.streetNumber = streetNumber;
+		this.city = city;
+		this.zip = zip;
+	}
+	
+	public UserDTO(Long userId, String firstName, String lastName, String username, String email, String password,
+			String matchingPassword, String type, String birthday, String street, Integer streetNumber, String city,
+			Integer zip) {
+		super();
+		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -158,4 +179,11 @@ public class UserDTO {
 		this.zip = zip;
 	}
 	
+	public Long getUserId() {
+		return this.userId;
+	}
+	
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
 }
