@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.hsp.kadori.dao.UserDao;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.UserDTO;
 import com.hsp.kadori.service.UserService;
-import com.hsp.kadori.service.utils.UserUtils;
 
 @Controller
 public class ProfileController {
@@ -25,13 +23,9 @@ public class ProfileController {
 	@Inject 
 	private UserService service;
 	
-	@Inject
-	UserDao userRepository;
-	
 	@RequestMapping(value="/my_profile")
 	public ModelAndView loadProfilePage(final Model model) {
-		String userName = UserUtils.getCurrentUserName();
-		User user = userRepository.findByUsername(userName);
+		User user = service.getLoggedInUser();
 		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
 			return new ModelAndView("redirect:/register");
 		}
@@ -43,8 +37,7 @@ public class ProfileController {
 	
 	@RequestMapping(value="/edit_profile", method=RequestMethod.GET)
 	public ModelAndView showEditProfileForm(final Model model) {
-		String userName = UserUtils.getCurrentUserName();
-		User user = userRepository.findByUsername(userName);
+		User user = service.getLoggedInUser();
 		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
 			return new ModelAndView("redirect:/register");
 		}

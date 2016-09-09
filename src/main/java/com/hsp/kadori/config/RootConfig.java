@@ -15,8 +15,10 @@ import com.hsp.kadori.dao.PostDao;
 import com.hsp.kadori.dao.UserDao;
 import com.hsp.kadori.dao.impl.PostDaoImpl;
 import com.hsp.kadori.dao.impl.UserDaoImpl;
+import com.hsp.kadori.service.FriendsService;
 import com.hsp.kadori.service.PostService;
 import com.hsp.kadori.service.UserService;
+import com.hsp.kadori.service.impl.FriendsServiceImpl;
 import com.hsp.kadori.service.impl.MyUserDetailsService;
 import com.hsp.kadori.service.impl.PostServiceImpl;
 import com.hsp.kadori.service.impl.UserServiceImpl;
@@ -61,6 +63,11 @@ public class RootConfig {
 	@Bean
 	public UserDetailsService userDetailsService() {
 		return new MyUserDetailsService();
+	}
+	
+	@Bean
+	public FriendsService friendsService() {
+		return new FriendsServiceImpl();
 	}
 	
 	@Bean

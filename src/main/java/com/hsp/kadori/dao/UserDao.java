@@ -11,6 +11,7 @@ public interface UserDao {
 
 	User findUserById(final Long userId);
 	List<User> findAllUsers();
+	List<User> findAllFriends(final long userId);
 	User save(User user);
 	User findByEmail(String email);
 	User findByUsername(String username);

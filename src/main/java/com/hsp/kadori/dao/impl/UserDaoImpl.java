@@ -64,4 +64,13 @@ public class UserDaoImpl implements UserDao {
 		return null;
 	}
 
+	@Override
+	public List<User> findAllFriends(long userId) {
+		ResponseEntity<User[]> respone = restTemplate.exchange(USER_URI_V1 + "/{userId}/friends", HttpMethod.GET, request,
+				User[].class, userId);
+		List<User> friendsList = Arrays.asList(respone.getBody());
+		
+		return friendsList;
+	}
+
 }
