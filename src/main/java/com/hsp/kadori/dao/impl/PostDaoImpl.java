@@ -32,11 +32,13 @@ public class PostDaoImpl implements PostDao {
 		restTemplate.postForLocation(POST_URI_V1, post);
 		return post;
 	}
+	
 
 	@Override
 	public List<Post> getPostsOfFriends(User me) {
-		// TODO implement
-		return null;
+		ResponseEntity<Post[]> respone = restTemplate.exchange(POST_URI_V1 + "/private/" + me.getUserId(), HttpMethod.GET, request, Post[].class);
+		List<Post> postList = Arrays.asList(respone.getBody());
+		return postList;
 	}
 
 	@Override

@@ -54,7 +54,6 @@ public class HomeController {
 		if (!result.hasErrors() && user != null) {
 			post.setUser(user);
 			post.setCreationTime(new Date());
-			post.setIsPublic(true); //TODO: add mechanism to check/uncheck public
 			Post newPost = postService.addNewPost(post);
 			
 			if(newPost != null) {
