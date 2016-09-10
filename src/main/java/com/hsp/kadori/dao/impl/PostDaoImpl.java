@@ -46,4 +46,13 @@ public class PostDaoImpl implements PostDao {
 		return postList;
 	}
 
+
+	@Override
+	public List<Post> getPostsOfGroup(long groupId) {
+		ResponseEntity<Post[]> respone = restTemplate.exchange(POST_URI_V1 + "/group/{groupId}", HttpMethod.GET, request, Post[].class, groupId);
+		List<Post> postList = Arrays.asList(respone.getBody());
+
+		return postList;
+	}
+
 }

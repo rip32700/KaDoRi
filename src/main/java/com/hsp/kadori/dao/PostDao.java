@@ -7,6 +7,7 @@ import com.hsp.kadori.domain.User;
 
 public interface PostDao {
 	Post save(Post post);
-	List<Post> getPostsOfFriends(User me);
+	List<Post> getPostsOfFriends(final User me);
 	List<Post> getPublicPosts();
+	List<Post> getPostsOfGroup(final long groupId);
 }

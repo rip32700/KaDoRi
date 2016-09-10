@@ -29,6 +29,10 @@
  		<put-attribute name="body" value="/WEB-INF/views/my_groups.jsp" />
  	</definition>
  	
+ 	<definition name="group" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/group.jsp" />
+ 	</definition>
+ 	
  	<definition name="my_profile" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/my_profile.jsp" />
  	</definition>

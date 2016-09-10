@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +21,7 @@ import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.Post;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.PostDTO;
+import com.hsp.kadori.service.GroupService;
 import com.hsp.kadori.service.PostService;
 import com.hsp.kadori.service.UserService;
 
@@ -34,19 +36,21 @@ public class GroupController {
 	@Inject
 	UserService userService;
 	
-//	@Inject
-//	GroupService groupService;
+	@Inject
+	GroupService groupService;
 	
 	public GroupController() {
 	}
 	
 	@RequestMapping(value="/group/{groupId}")
-	public String loadGroupPage(final Model model) {
-//		User user = userService.getLoggedInUser();
-//		posts = postService.getPosts(user);
-//		
-//		model.addAttribute("postsList", posts);
-//		model.addAttribute("postDTO", new Post());
+	public String loadGroupPage(final Model model, @PathVariable("groupId") long groupId) {
+		
+		Group group = groupService.getGroupById(groupId);
+		model.addAttribute("group", group);
+		posts = postService.getGroupPosts(groupId);
+		
+		model.addAttribute("groupPostsList", posts);
+		model.addAttribute("postDTO", new Post());
 		
 		return "group";
 	}
@@ -64,6 +68,7 @@ public class GroupController {
 	@RequestMapping(value="/group/{groupId}/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
 		User user = userService.getLoggedInUser();
+		//TODO: get and add group id
 		
 		if (!result.hasErrors() && user != null) {
 			post.setUser(user);
@@ -77,7 +82,7 @@ public class GroupController {
 	    if (result.hasErrors()) {
 	        return null; //TODO
 	    } else {
-	        return new ModelAndView("home", "postsList", posts);
+	        return new ModelAndView("home", "groupPostsList", posts);
 	    }
 	}	
 }

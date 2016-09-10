@@ -9,4 +9,5 @@ import com.hsp.kadori.dto.PostDTO;
 public interface PostService {
 	Post addNewPost(final PostDTO post);
 	List<Post> getPosts(final User user);
+	List<Post> getGroupPosts(final long groupId);
 }

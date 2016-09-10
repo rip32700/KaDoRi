@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.hsp.kadori.dao.PostDao;
+import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.Post;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.PostDTO;
@@ -36,6 +37,13 @@ public class PostServiceImpl implements PostService {
 		List<Post> publicPosts = repository.getPublicPosts();
 		
 		return PostUtils.mergeAndSort(publicPosts, postsOfFriends);
+	}
+
+	@Override
+	public List<Post> getGroupPosts(long groupId) {
+		List<Post> postsOfGroup = repository.getPostsOfGroup(groupId);
+		
+		return postsOfGroup;
 	}
 
 }
