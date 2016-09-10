@@ -8,6 +8,10 @@ public class Group {
 	private String groupDescription;
 	private String groupName;
 	
+	public Group() {
+		
+	}
+	
 	public Group (Long groupId, Date date, String description, String name) {
 		super();
 		this.groupId = groupId;

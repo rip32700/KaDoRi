@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.hsp.kadori.dao.UserDao;
+import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.User;
 
 public class UserDaoImpl implements UserDao {
@@ -65,12 +66,21 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<User> findAllFriends(long userId) {
+	public List<User> findAllFriends(final long userId) {
 		ResponseEntity<User[]> respone = restTemplate.exchange(USER_URI_V1 + "/{userId}/friends", HttpMethod.GET, request,
 				User[].class, userId);
 		List<User> friendsList = Arrays.asList(respone.getBody());
 		
 		return friendsList;
 	}
+	
+	@Override
+	public List<Group> getGroups(final long userId) {
+		ResponseEntity<Group[]> respone = restTemplate.exchange(USER_URI_V1 + "/{userId}/groups", HttpMethod.GET, request, Group[].class, userId);
+		List<Group> groups = Arrays.asList(respone.getBody());
+		
+		return groups;
+	}
+	
 
 }

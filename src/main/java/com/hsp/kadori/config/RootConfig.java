@@ -11,14 +11,18 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.hsp.kadori.dao.GroupDao;
 import com.hsp.kadori.dao.PostDao;
 import com.hsp.kadori.dao.UserDao;
+import com.hsp.kadori.dao.impl.GroupDaoImpl;
 import com.hsp.kadori.dao.impl.PostDaoImpl;
 import com.hsp.kadori.dao.impl.UserDaoImpl;
 import com.hsp.kadori.service.FriendsService;
+import com.hsp.kadori.service.GroupService;
 import com.hsp.kadori.service.PostService;
 import com.hsp.kadori.service.UserService;
 import com.hsp.kadori.service.impl.FriendsServiceImpl;
+import com.hsp.kadori.service.impl.GroupServiceImpl;
 import com.hsp.kadori.service.impl.MyUserDetailsService;
 import com.hsp.kadori.service.impl.PostServiceImpl;
 import com.hsp.kadori.service.impl.UserServiceImpl;
@@ -51,6 +55,11 @@ public class RootConfig {
 	}
 	
 	@Bean
+	public GroupDao groupDao() {
+		return new GroupDaoImpl();
+	}
+	
+	@Bean
 	public PostService postService() {
 		return new PostServiceImpl();
 	}
@@ -68,6 +77,11 @@ public class RootConfig {
 	@Bean
 	public FriendsService friendsService() {
 		return new FriendsServiceImpl();
+	}
+	
+	@Bean
+	public GroupService groupService() {
+		return new GroupServiceImpl();
 	}
 	
 	@Bean

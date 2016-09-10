@@ -20,9 +20,6 @@ public class PostDaoImpl implements PostDao {
 	private RestTemplate restTemplate = new RestTemplate();
 	
 	@Inject
-	JdbcOperations jdbcOperations;
-
-	@Inject
 	HttpEntity<String> request;
 	
 	@Override

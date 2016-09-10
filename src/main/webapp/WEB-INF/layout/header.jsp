@@ -19,6 +19,9 @@
 				<sec:authorize access="isAuthenticated()">
 					<li><a href="<c:url value="/my_friends" />">My Friends</a></li>
 				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="<c:url value="/my_groups" />">My Groups</a></li>
+				</sec:authorize>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAuthenticated()">

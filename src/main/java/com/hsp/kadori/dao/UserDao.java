@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.User;
 
 @Repository
@@ -15,6 +16,6 @@ public interface UserDao {
 	User save(User user);
 	User findByEmail(String email);
 	User findByUsername(String username);
-	
+	List<Group> getGroups(final long userId);
 }
 

@@ -1,9 +1,12 @@
 package com.hsp.kadori.service.impl;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import com.hsp.kadori.dao.UserDao;
+import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.UserDTO;
 import com.hsp.kadori.exceptions.EmailExistsException;
@@ -91,6 +94,13 @@ public class UserServiceImpl implements UserService {
 	public User getLoggedInUser() {
 		String currentUserName = UserUtils.getCurrentUserName();
 		return repository.findByUsername(currentUserName);
+	}
+	
+	@Override
+	public List<Group> getGroups(User user) {
+		List<Group> groups = repository.getGroups(user.getUserId());
+		
+		return groups;
 	}
 
 }
