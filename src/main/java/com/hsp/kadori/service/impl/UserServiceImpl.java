@@ -103,4 +103,14 @@ public class UserServiceImpl implements UserService {
 		return groups;
 	}
 
+	@Override
+	public User getUserById(long userId) {
+		return repository.findUserById(userId);
+	}
+
+	@Override
+	public User getUserByName(String userName) {
+		return repository.findByUsername(userName);
+	}
+
 }

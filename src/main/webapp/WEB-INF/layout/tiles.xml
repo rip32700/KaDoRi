@@ -33,8 +33,8 @@
  		<put-attribute name="body" value="/WEB-INF/views/group.jsp" />
  	</definition>
  	
- 	<definition name="my_profile" extends="base">
- 		<put-attribute name="body" value="/WEB-INF/views/my_profile.jsp" />
+ 	<definition name="profile" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/profile.jsp" />
  	</definition>
  	
  	<definition name="edit_profile" extends="base">

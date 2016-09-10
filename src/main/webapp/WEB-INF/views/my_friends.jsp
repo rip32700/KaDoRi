@@ -20,4 +20,3 @@
 			</c:otherwise>
 		</c:choose>
 	</ul>
-</p>

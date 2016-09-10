@@ -15,5 +15,7 @@ public interface UserService {
 	User updateUserAccount(final UserDTO user);
 	User getLoggedInUser();
 	List<Group> getGroups(User user);
+	User getUserById(long userId);
+	User getUserByName(String userName);
 	
 }

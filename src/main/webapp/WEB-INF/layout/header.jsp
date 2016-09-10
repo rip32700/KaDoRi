@@ -25,7 +25,7 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="isAuthenticated()">
-					<li><a href="<c:url value="/my_profile" />">Profile</a></li>
+					<li><a href="<c:url value="/profile/my_profile" />">Profile</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAnonymous()">
 					<li><a href="<c:url value="/register" />">Sign up</a></li>

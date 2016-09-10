@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,7 +24,7 @@ public class ProfileController {
 	@Inject 
 	private UserService service;
 	
-	@RequestMapping(value="/my_profile")
+	@RequestMapping(value="/profile/my_profile")
 	public ModelAndView loadProfilePage(final Model model) {
 		User user = service.getLoggedInUser();
 		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
@@ -31,11 +32,31 @@ public class ProfileController {
 		}
 		
 		model.addAttribute("currentUser", user);
+		model.addAttribute("user", user);
 		
-		return new ModelAndView("my_profile");
+		return new ModelAndView("profile");
 	}
 	
-	@RequestMapping(value="/edit_profile", method=RequestMethod.GET)
+	@RequestMapping(value="/profile/{username}")
+	public ModelAndView loadProfilePage(final Model model, @PathVariable("username") String userName) {
+		User user = service.getUserByName(userName);
+		User currentUser = service.getLoggedInUser();
+		
+		if(user == null) {
+			return new ModelAndView("redirect:/");
+		}
+		
+		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/register");
+		}
+		
+		model.addAttribute("currentUser", currentUser);
+		model.addAttribute("user", user);
+		
+		return new ModelAndView("profile");
+	}
+	
+	@RequestMapping(value="/profile/edit_profile", method=RequestMethod.GET)
 	public ModelAndView showEditProfileForm(final Model model) {
 		User user = service.getLoggedInUser();
 		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
@@ -46,7 +67,7 @@ public class ProfileController {
 		return new ModelAndView("edit_profile");
 	}
 	
-	@RequestMapping(value="/edit_profile", method=RequestMethod.POST)
+	@RequestMapping(value="/profile/edit_profile", method=RequestMethod.POST)
 	public ModelAndView editProfile(@ModelAttribute("userDTO") @Valid final UserDTO user, final BindingResult result, final Errors errors, final HttpServletRequest request) {
 		if (result.hasErrors()) {
 	        return new ModelAndView("edit_profile", "userDTO", user);
