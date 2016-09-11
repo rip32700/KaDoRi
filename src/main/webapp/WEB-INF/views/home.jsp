@@ -1,14 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page session="false"%>
 
 <h1>New Post:</h1>
 <form:form action="/new_Post" modelAttribute="postDTO" method="post" class="form-horizontal">
 	<div class="form-group">
 		<form:textarea class="form-control" rows="7" id="newPost" path="content" value="" placeholder="Enter your new Post..."/>
-		<form:radiobutton class="radio-inline" id="newPost" path="isPublic" value="true"/>Make Post public
-		<form:radiobutton class="radio-inline" id="newPost" path="isPublic" value="false"/>Make Post only visible for friends
+		<sec:authorize access="isAuthenticated()">
+			<form:radiobutton class="radio-inline" id="newPost" path="isPublic" value="true"/>Make Post public
+			<form:radiobutton class="radio-inline" id="newPost" path="isPublic" value="false"/>Make Post only visible for friends
+		</sec:authorize>
 		<div class="post-button">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="submit" class="btn btn-warning" value="Post">

@@ -15,7 +15,7 @@ public class PostDTO {
 	private User user;
 	
 	public PostDTO() {
-		
+		this.isPublic = true;
 	}
 	
 	public PostDTO (Long postId, String content, Date creationTime, boolean isPublic, User user) {

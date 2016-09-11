@@ -31,7 +31,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<Post> getPosts(User user) {
 		List<Post> postsOfFriends = new ArrayList<>();
-		if(user!=null) {
+		if(user!=null && !user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
 			postsOfFriends = repository.getPostsOfFriends(user);
 		}
 		List<Post> publicPosts = repository.getPublicPosts();

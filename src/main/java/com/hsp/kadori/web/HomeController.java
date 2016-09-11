@@ -37,14 +37,14 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/")
-	public String home(final Model model) {
+	public ModelAndView home(final Model model) {
 		User user = userService.getLoggedInUser();
 		posts = postService.getPosts(user);
 		
 		model.addAttribute("postsList", posts);
 		model.addAttribute("postDTO", new Post());
 		
-		return "home";
+		return new ModelAndView("home", "postsList", posts);
 	}
 	
 	@RequestMapping(value="/new_Post", method = RequestMethod.POST)
@@ -55,6 +55,9 @@ public class HomeController {
 			post.setUser(user);
 			post.setCreationTime(new Date());
 			Post newPost = postService.addNewPost(post);
+			
+			//clear content to show empty textbox
+			post.setContent("");
 			
 			if(newPost != null) {
 				posts.add(0, newPost);
