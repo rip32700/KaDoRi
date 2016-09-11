@@ -8,7 +8,13 @@
 <h2>Description:</h2>
 <div>"${group.groupDescription}"</div>
 <h2>Group Members:</h2>
-<br>
+<ul class="list-group">
+	<c:forEach items="${groupMembers}" var="member">
+				<a href="/profile/${member.username}" class="list-group-item">
+			<c:out value="${member.username}"></c:out>
+		</a>
+	</c:forEach>
+</ul>
 <h2>New Post:</h2>
 <form:form action="/group/${group.groupId}/new_Post" modelAttribute="postDTO" method="post" class="form-horizontal">
 	<div class="form-group">

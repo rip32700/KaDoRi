@@ -49,6 +49,9 @@ public class GroupController {
 		this.group = groupService.getGroupById(groupId);
 		model.addAttribute("group", group);
 
+		List<User> groupMembers = groupService.getGroupMembers(groupId);
+		model.addAttribute("groupMembers", groupMembers);
+
 		posts = postService.getGroupPosts(groupId);
 		Collections.reverse(posts);
 		
