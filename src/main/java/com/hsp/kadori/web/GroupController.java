@@ -1,6 +1,7 @@
 package com.hsp.kadori.web;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import com.hsp.kadori.service.UserService;
 public class GroupController {
 
 	private List<Post> posts = new ArrayList<>();
+	private Group group = null;
 	
 	@Inject
 	PostService postService;
@@ -44,10 +46,11 @@ public class GroupController {
 	
 	@RequestMapping(value="/group/{groupId}")
 	public String loadGroupPage(final Model model, @PathVariable("groupId") long groupId) {
-		
-		Group group = groupService.getGroupById(groupId);
+		this.group = groupService.getGroupById(groupId);
 		model.addAttribute("group", group);
+
 		posts = postService.getGroupPosts(groupId);
+		Collections.reverse(posts);
 		
 		model.addAttribute("groupPostsList", posts);
 		model.addAttribute("postDTO", new Post());
@@ -67,13 +70,19 @@ public class GroupController {
 	
 	@RequestMapping(value="/group/{groupId}/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
+		model.addAttribute("group", group);
 		User user = userService.getLoggedInUser();
-		//TODO: get and add group id
 		
 		if (!result.hasErrors() && user != null) {
+			if(group != null) {
+				post.setGroup(this.group);
+			}
 			post.setUser(user);
 			post.setCreationTime(new Date());
 			Post newPost = postService.addNewPost(post);
+			
+			//clear content to show an empty textbox
+			post.setContent("");
 			
 			if(newPost != null) {
 				posts.add(0, newPost);
@@ -82,7 +91,7 @@ public class GroupController {
 	    if (result.hasErrors()) {
 	        return null; //TODO
 	    } else {
-	        return new ModelAndView("home", "groupPostsList", posts);
+	        return new ModelAndView("group", "groupPostsList", posts);
 	    }
 	}	
 }

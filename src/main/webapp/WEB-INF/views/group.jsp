@@ -10,7 +10,7 @@
 <h2>Group Members:</h2>
 <br>
 <h2>New Post:</h2>
-<form:form action="/new_Post" modelAttribute="postDTO" method="post" class="form-horizontal">
+<form:form action="/group/${group.groupId}/new_Post" modelAttribute="postDTO" method="post" class="form-horizontal">
 	<div class="form-group">
 		<form:textarea class="form-control" rows="7" id="newPost" path="content" value="" placeholder="Enter your new Post..."/>
 		<div class="post-button">

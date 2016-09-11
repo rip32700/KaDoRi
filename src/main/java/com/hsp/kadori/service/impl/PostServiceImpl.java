@@ -24,6 +24,7 @@ public class PostServiceImpl implements PostService {
 		newPost.setCreationTime(post.getCreationTime());
 		newPost.setUser(post.getUser());
 		newPost.setIsPublic(post.getIsPublic());
+		newPost.setGroup(post.getGroup());
 		
 		return repository.save(newPost);
 	}
@@ -41,9 +42,9 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<Post> getGroupPosts(long groupId) {
-		List<Post> postsOfGroup = repository.getPostsOfGroup(groupId);
+		 List<Post> postsOfGroup = repository.getPostsOfGroup(groupId);
 		
-		return postsOfGroup;
+		return new ArrayList<Post>(postsOfGroup);
 	}
 
 }
