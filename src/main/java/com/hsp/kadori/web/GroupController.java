@@ -81,6 +81,7 @@ public class GroupController {
 				post.setGroup(this.group);
 			}
 			post.setUser(user);
+			post.setIsPublic(false);
 			post.setCreationTime(new Date());
 			Post newPost = postService.addNewPost(post);
 			
