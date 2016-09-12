@@ -10,11 +10,17 @@ public class PostUtils {
 	
 	public static List<Post> mergeAndSort(List<Post> l1, List<Post> l2) {
 		List<Post> resultList = new ArrayList<>();
+		
 		if(l1 != null) {
 			resultList.addAll(l1);
 		}
+		
 		if(l2 != null) {
-			resultList.addAll(l2);
+			for (Post post : l2) {
+				if(!resultList.contains(post)) {
+					resultList.add(post);
+				}
+			}
 		}
 		
 		resultList.sort((Post p1, Post p2)->p1.getCreationTime().compareTo(p2.getCreationTime()));
