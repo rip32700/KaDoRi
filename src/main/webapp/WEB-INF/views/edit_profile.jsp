@@ -3,6 +3,13 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="false"%>
 
+<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
 
 <div class="row">
 		<div class="col-md-6 col-md-offset-3">
@@ -11,7 +18,6 @@
 </div>
 <br>
 <form:form class="form-inline" modelAttribute="userDTO" method="POST">
-	<form:hidden path="userId"/>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
@@ -70,14 +76,12 @@
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group ">
-				<div class="bootstrap-iso">
-					<label class="control-label registration-form-label" for="date"> Birthday </label>
-					<div class="input-group" style="width: 220px; margin-top: 20px;">
-						<div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-						<form:input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" path="birthday" required="true" />
-					</div>
-					<form:errors path="birthday" element="div"  cssClass="error"/>
+				<label class="control-label registration-form-label" for="birthday"> Birthday </label>
+				<div class="input-group date" style="width: 220px; margin-top: 20px;" id="birthday" data-date-format="yyyy-mm-dd" data-provide="datepicker">
+					<form:input class="form-control" placeholder="yyyy-mm-dd" type="text" path="birthday" required="true"/>
+					<div class="input-group-addon" ><i class="fa fa-calendar"></i></div>
 				</div>
+				<form:errors path="birthday" element="div"  cssClass="error"/>
 			</div>
 		</div>
 	</div>
@@ -119,30 +123,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<button style="margin-top: 20px; margin-left: 100px; width: 150px;" class="btn btn-primary" type="submit">Save changes</button>
+			<button style="margin-top: 20px; margin-left: 100px; width: 150px;" class="btn btn-primary" type="submit">Submit</button>
 		</div>
 	</div>
 </form:form>
-
-
-<!-- Extra JavaScript/CSS added manually in "Settings" tab -->
-<!-- Include jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
-
-<script>
-	$(document).ready(
-			function() {
-				var date_input = $('input[name="date"]'); //our date input has the name "date"
-				var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
-				date_input.datepicker({
-					format : 'mm/dd/yyyy',
-					container : container,
-					todayHighlight : true,
-					autoclose : true,
-				})
-			})
-</script>
