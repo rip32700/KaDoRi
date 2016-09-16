@@ -72,8 +72,7 @@ public class ProfileController {
 		if (result.hasErrors()) {
 	        return new ModelAndView("edit_profile", "userDTO", user);
 	    }
-		
-		User updatedUser = service.updateUserAccount(user);
-		return new ModelAndView("my_profile", "currentUser", updatedUser);
+
+		return new ModelAndView("redirect:/profile/my_profile");
 	}
 }

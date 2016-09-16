@@ -39,6 +39,7 @@
  	
  	<definition name="edit_profile" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/edit_profile.jsp" />
+ 		<put-attribute name="profile_editor" value="/WEB-INF/views/profile_editor.jsp" cascade="true" />
  	</definition>
  	
  	<definition name="new_post" extends="base">
@@ -59,6 +60,7 @@
  	
  	<definition name="registration" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/registration.jsp" />
+ 		<put-attribute name="profile_editor" value="/WEB-INF/views/profile_editor.jsp" cascade="true" />
  	</definition>
  	
  	<definition name="accessDenied" extends="base">

@@ -54,8 +54,7 @@
 		       </div>
 		       <c:if test="${currentUser.equals(user)}">
 			       <div class="row">
-			       		<input type="button"  onclick="location.href='/profile/edit_profile'" value="Edit Data" >
-			       		<%-- <a href="<c:url value="/edit_profile" />">Edit Data</a> --%>
+			       		<button type="button", class="btn btn-primary" onclick="location.href='/profile/edit_profile'">Edit profile data</button>
 			       </div>
 		       </c:if>
 			</div> 

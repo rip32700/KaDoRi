@@ -1,1 +1,1 @@
-<div class="footer">Copyright &copy; Philipp Rieger, Michael Dorr, Andreas Kalo Fogados 2016</div>
+<div class="footer">Copyright &copy; Michael Dorr, Andreas Kalo Fogados 2016</div>
