@@ -1,5 +1,7 @@
 package com.hsp.kadori.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -16,17 +18,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.UserDTO;
+import com.hsp.kadori.service.FriendsService;
 import com.hsp.kadori.service.UserService;
 
 @Controller
 public class ProfileController {
 	
+	@Inject
+	FriendsService friendsService;
+	
 	@Inject 
-	private UserService service;
+	private UserService userService;
 	
 	@RequestMapping(value="/profile/my_profile")
 	public ModelAndView loadProfilePage(final Model model) {
-		User user = service.getLoggedInUser();
+		User user = userService.getLoggedInUser();
 		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
 			return new ModelAndView("redirect:/register");
 		}
@@ -39,8 +45,13 @@ public class ProfileController {
 	
 	@RequestMapping(value="/profile/{username}")
 	public ModelAndView loadProfilePage(final Model model, @PathVariable("username") String userName) {
-		User user = service.getUserByName(userName);
-		User currentUser = service.getLoggedInUser();
+		User user = userService.getUserByName(userName);
+		User currentUser = userService.getLoggedInUser();
+		List<User> allFriends = friendsService.getAllFriends(currentUser);
+		boolean isFriend = false;
+		if(allFriends.contains(user)) {
+			isFriend = true;
+		}
 		
 		if(user == null) {
 			return new ModelAndView("redirect:/");
@@ -52,13 +63,14 @@ public class ProfileController {
 		
 		model.addAttribute("currentUser", currentUser);
 		model.addAttribute("user", user);
+		model.addAttribute("isFriend", isFriend);
 		
 		return new ModelAndView("profile");
 	}
 	
 	@RequestMapping(value="/profile/edit_profile", method=RequestMethod.GET)
 	public ModelAndView showEditProfileForm(final Model model) {
-		User user = service.getLoggedInUser();
+		User user = userService.getLoggedInUser();
 		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
 			return new ModelAndView("redirect:/register");
 		}
@@ -74,5 +86,37 @@ public class ProfileController {
 	    }
 
 		return new ModelAndView("redirect:/profile/my_profile");
+	}
+	
+	@RequestMapping(value="/profile/{username}/add_friend")
+	public ModelAndView addAsFriend(Model model, @PathVariable("username") String userName) {
+		User loggedInUser = userService.getLoggedInUser();
+		User otherUser = userService.getUserByName(userName);
+		
+		List<User> allFriends = friendsService.getAllFriends(loggedInUser);
+		if(allFriends.contains(otherUser)) {
+			//Error: already friends -> no new friendship should be added
+			//TODO Error-Handling
+			return new ModelAndView("home");
+		}
+		friendsService.addFriendship(loggedInUser, otherUser);
+		
+		return new ModelAndView("friendshipSuccess");
+	}
+	
+	@RequestMapping(value="/profile/{username}/add_friend/friendshipSuccess")
+	public ModelAndView addAsFriendSuccess(Model model, @PathVariable("username") String username) {
+		model.addAttribute("username", username);
+		return new ModelAndView("friendshipSuccess");
+	}
+	
+	@RequestMapping(value="/profile/{username}/remove_friend")
+	public ModelAndView removeAsFriend(Model model, @PathVariable("username") String userName) {
+		User loggedInUser = userService.getLoggedInUser();
+		User otherUser = userService.getUserByName(userName);
+		
+		friendsService.removeFriendship(loggedInUser, otherUser);
+		
+		return new ModelAndView("friendshipSuccess");
 	}
 }

@@ -11,9 +11,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+import com.hsp.kadori.dao.FriendshipDao;
 import com.hsp.kadori.dao.GroupDao;
 import com.hsp.kadori.dao.PostDao;
 import com.hsp.kadori.dao.UserDao;
+import com.hsp.kadori.dao.impl.FriendshipDaoImpl;
 import com.hsp.kadori.dao.impl.GroupDaoImpl;
 import com.hsp.kadori.dao.impl.PostDaoImpl;
 import com.hsp.kadori.dao.impl.UserDaoImpl;
@@ -57,6 +59,11 @@ public class RootConfig {
 	@Bean
 	public GroupDao groupDao() {
 		return new GroupDaoImpl();
+	}
+
+	@Bean
+	public FriendshipDao friendshipDao() {
+		return new FriendshipDaoImpl();
 	}
 	
 	@Bean

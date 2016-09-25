@@ -17,5 +17,6 @@ public interface UserService {
 	List<Group> getGroups(User user);
 	User getUserById(long userId);
 	User getUserByName(String userName);
-	
+	List<User> getAvailableFriends(User me);
+	List<Group> getAvailableGroups(User me);
 }

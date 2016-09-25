@@ -38,6 +38,20 @@ public class User {
 		this.type = type;
 		this.role = role;
 	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if(other instanceof User) {
+			User otherUser = (User) other;
+			if(otherUser.userId == this.userId) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return super.equals(other);
+		}
+	}
 
 	public Long getUserId() {
 		return userId;

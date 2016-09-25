@@ -17,5 +17,7 @@ public interface UserDao {
 	User findByEmail(String email);
 	User findByUsername(String username);
 	List<Group> getGroups(final long userId);
+	List<Group> getJoinableGroups(User me);
+	List<User> findAvailableFriends(User me);
 }
 

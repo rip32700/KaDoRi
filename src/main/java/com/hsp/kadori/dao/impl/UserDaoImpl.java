@@ -81,6 +81,22 @@ public class UserDaoImpl implements UserDao {
 		
 		return groups;
 	}
+
+	@Override
+	public List<User> findAvailableFriends(User me) {
+		ResponseEntity<User[]> response = restTemplate.exchange(USER_URI_V1 + "/{userId}/availableFriends", HttpMethod.GET, request, User[].class, me.getUserId());
+		List<User> users = Arrays.asList(response.getBody());
+		
+		return users;
+	}
+
+	@Override
+	public List<Group> getJoinableGroups(User me) {
+		ResponseEntity<Group[]> response = restTemplate.exchange(USER_URI_V1 + "/{userId}/availableFriends", HttpMethod.GET, request, Group[].class, me.getUserId());
+		List<Group> groups = Arrays.asList(response.getBody());
+		
+		return groups;
+	}
 	
 
 }

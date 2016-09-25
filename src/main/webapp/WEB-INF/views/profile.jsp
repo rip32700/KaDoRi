@@ -52,11 +52,33 @@
 		             </table>
 		           </div>
 		       </div>
-		       <c:if test="${currentUser.equals(user)}">
+		       <c:choose>
+			    <c:when test="${currentUser.equals(user)}">
 			       <div class="row">
-			       		<button type="button", class="btn btn-primary" onclick="location.href='/profile/edit_profile'">Edit profile data</button>
+			       		<button type="button", class="btn btn-warning" onclick="location.href='/profile/edit_profile'">Edit profile data</button>
+			       </div>
+			    </c:when>
+			    <c:when test="${isFriend.equals(true)}">
+			       <div class="row">
+			       		<button type="button", class="btn btn-warning" onclick="location.href='/remove_friend'">Remove friend</button>
+			       </div>
+			    </c:when>      
+			    <c:otherwise>
+			       <div class="row">
+			       		<button type="button", class="btn btn-warning" onclick="location.href='/profile/${user.username}/add_friend'">Add as friend</button>
+			       </div>
+			    </c:otherwise>
+			   </c:choose>
+		       <%-- <c:if test="${currentUser.equals(user)}">
+			       <div class="row">
+			       		<button type="button", class="btn btn-warning" onclick="location.href='/profile/edit_profile'">Edit profile data</button>
 			       </div>
 		       </c:if>
+		       <c:if test="${currentUser.notEquals(user)}">
+			       <div class="row">
+			       		<button type="button", class="btn btn-warning" onclick="location.href='/profile/edit_profile'">Edit profile data</button>
+			       </div>
+		       </c:if> --%>
 			</div> 
 		</div>
 	</div>

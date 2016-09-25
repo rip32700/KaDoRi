@@ -13,6 +13,10 @@
  		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
  	</definition>
  	
+ 	<definition name="explore" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/explore.jsp" />
+ 	</definition>
+ 	
  	<definition name="error" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/error.jsp" />
  	</definition>
@@ -40,6 +44,10 @@
  	<definition name="edit_profile" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/edit_profile.jsp" />
  		<put-attribute name="profile_editor" value="/WEB-INF/views/profile_editor.jsp" cascade="true" />
+ 	</definition>
+ 	
+ 	<definition name="friendshipSuccess" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/friendshipSuccess.jsp" />
  	</definition>
  	
  	<definition name="new_post" extends="base">

@@ -113,4 +113,14 @@ public class UserServiceImpl implements UserService {
 		return repository.findByUsername(userName);
 	}
 
+	@Override
+	public List<User> getAvailableFriends(User me) {
+		return repository.findAvailableFriends(me);
+	}
+
+	@Override
+	public List<Group> getAvailableGroups(User me) {
+		return repository.getJoinableGroups(me);
+	}
+
 }

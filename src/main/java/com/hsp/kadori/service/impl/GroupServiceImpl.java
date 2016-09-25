@@ -25,5 +25,4 @@ public class GroupServiceImpl implements com.hsp.kadori.service.GroupService {
 	public List<User> getGroupMembers(long groupId) {
 		return new ArrayList<User>(repository.getGroupMembers(groupId));
 	}
-	
 }
