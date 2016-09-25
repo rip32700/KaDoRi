@@ -92,7 +92,7 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<Group> getJoinableGroups(User me) {
-		ResponseEntity<Group[]> response = restTemplate.exchange(USER_URI_V1 + "/{userId}/availableFriends", HttpMethod.GET, request, Group[].class, me.getUserId());
+		ResponseEntity<Group[]> response = restTemplate.exchange(USER_URI_V1 + "/{userId}/joinableGroups", HttpMethod.GET, request, Group[].class, me.getUserId());
 		List<Group> groups = Arrays.asList(response.getBody());
 		
 		return groups;

@@ -47,9 +47,9 @@
 			</c:when>
 			<c:otherwise>
 				<ul class="list-group">
-					<c:forEach items="${availableGroups}" var="group">
-  						<a href="/group/${group.groupId}" class="list-group-item">
-							<c:out value="${group.groupName}"></c:out>
+					<c:forEach items="${availableGroups}" var="groupItem">
+  						<a href="/group/${groupItem.groupId}" class="list-group-item">
+							<c:out value="${groupItem.groupName}"></c:out>
 						</a>
 					</c:forEach>
 				</ul>
