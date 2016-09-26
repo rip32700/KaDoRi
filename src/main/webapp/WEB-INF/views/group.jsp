@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="false"%>
 
-<input type="submit" style="float:right" class="btn btn-warning" value="Exit Group">
+<input type="submit" style="float:right" class="btn btn-warning" value="Leave this Group">
 <br>
 <h1>Welcome to Group "${group.groupName}"</h1> 
 <br>

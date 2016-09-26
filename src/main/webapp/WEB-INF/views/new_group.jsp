@@ -26,8 +26,8 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="post-button">
-			<input type="submit" class="btn btn-warning" value="Submit">
+		<div>
+			<input type="submit" style="margin-top: 20px; width: 100px;" class="btn btn-warning" value="Submit">
 		</div>
 	</div>
 </form:form>

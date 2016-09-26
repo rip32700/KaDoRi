@@ -80,6 +80,10 @@ public class GroupController {
 	@RequestMapping(value="/group/{groupId}/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
 		model.addAttribute("group", group);
+		
+		List<User> groupMembers = groupService.getGroupMembers(group.getGroupId());
+		model.addAttribute("groupMembers", groupMembers);
+		
 		User user = userService.getLoggedInUser();
 		
 		if (!result.hasErrors() && user != null) {
