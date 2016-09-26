@@ -29,7 +29,7 @@ public class FriendshipDaoImpl implements FriendshipDao {
 
 	@Override
 	public void delete(User user1, User user2) {
-		// TODO Auto-generated method stub
+		restTemplate.postForEntity(FRIENDSHIP_URI_V1 + "delete", new Friendship(user1, user2), Friendship.class);
 	}
 
 }

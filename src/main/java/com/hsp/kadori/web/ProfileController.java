@@ -117,6 +117,6 @@ public class ProfileController {
 		
 		friendsService.removeFriendship(loggedInUser, otherUser);
 		
-		return new ModelAndView("friendshipSuccess");
+		return new ModelAndView("redirect:/my_friends");
 	}
 }

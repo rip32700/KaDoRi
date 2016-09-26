@@ -1,5 +1,6 @@
 package com.hsp.kadori.web;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,7 +49,11 @@ public class GroupController {
 	@RequestMapping(value="/group/{groupId}")
 	public String loadGroupPage(final Model model, @PathVariable("groupId") long groupId) {
 		Group group = groupService.getGroupById(groupId);
+		List<Group> allUserGroups = userService.getGroups(userService.getLoggedInUser());
+		boolean isInGroup = allUserGroups.stream().anyMatch(x -> x.getGroupId().equals(groupId));
+		
 		model.addAttribute("group", group);
+		model.addAttribute("isInGroup", isInGroup);
 
 		List<User> groupMembers = groupService.getGroupMembers(groupId);
 		model.addAttribute("groupMembers", groupMembers);

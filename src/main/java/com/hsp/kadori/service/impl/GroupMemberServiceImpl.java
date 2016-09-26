@@ -17,5 +17,9 @@ public class GroupMemberServiceImpl implements GroupMemberService{
 	public GroupMember createGroupMember(User user, Group group) {
 		return repository.save(new GroupMember(group, user));
 	}
+	
+	public void removeGroupMember(User user, Group group) {
+		repository.delete(new GroupMember(group, user));
+	}
 
 }

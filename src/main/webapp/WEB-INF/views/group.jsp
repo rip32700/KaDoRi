@@ -3,7 +3,18 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ page session="false"%>
 
-<input type="submit" style="float:right" class="btn btn-warning" value="Leave this Group">
+<c:choose>
+	<c:when test="${isInGroup.equals(true)}">
+		<div class="row">
+			<button type="button" class="btn btn-warning" style="float:right" onclick="location.href='/group/${group.groupId}/leave_group'">Leave Group</button>
+		</div>
+	</c:when>      
+	<c:otherwise>
+	   <div class="row">
+	   		<button type="button" class="btn btn-warning" style="float:right" onclick="location.href='/group/${group.groupId}/join_group'">Join Group</button>
+	   </div>
+	</c:otherwise>
+</c:choose>
 <br>
 <h1>Welcome to Group "${group.groupName}"</h1> 
 <br>

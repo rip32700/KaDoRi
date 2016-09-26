@@ -6,4 +6,5 @@ import com.hsp.kadori.domain.User;
 
 public interface GroupMemberService {
 	GroupMember createGroupMember(User user, Group group);
+	void removeGroupMember(User user, Group group);
 }
