@@ -32,6 +32,14 @@
  	<definition name="my_groups" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/my_groups.jsp" />
  	</definition>
+
+ 	<definition name="new_group" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/new_group.jsp" />
+ 	</definition>
+ 	
+ 	<definition name="group_created" extends="base">
+ 		<put-attribute name="body" value="/WEB-INF/views/group_created.jsp" />
+ 	</definition>
  	
  	<definition name="group" extends="base">
  		<put-attribute name="body" value="/WEB-INF/views/group.jsp" />

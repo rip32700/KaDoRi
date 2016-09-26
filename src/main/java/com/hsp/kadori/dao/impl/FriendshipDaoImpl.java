@@ -11,7 +11,7 @@ import com.hsp.kadori.domain.User;
 
 public class FriendshipDaoImpl implements FriendshipDao {
 
-	private static final String Friendship_URI_V1 = "http://localhost:8181/friendship/";
+	private static final String FRIENDSHIP_URI_V1 = "http://localhost:8181/friendship/";
 	private RestTemplate restTemplate = new RestTemplate();
 
 	@Inject
@@ -19,8 +19,7 @@ public class FriendshipDaoImpl implements FriendshipDao {
 	
 	@Override
 	public Friendship save(Friendship friendship) {
-		restTemplate.postForLocation(Friendship_URI_V1, friendship);
-		return friendship;
+		return restTemplate.postForEntity(FRIENDSHIP_URI_V1, friendship, Friendship.class).getBody();
 	}
 
 	@Override

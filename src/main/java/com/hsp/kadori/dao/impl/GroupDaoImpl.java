@@ -15,7 +15,7 @@ import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.User;
 
 public class GroupDaoImpl implements GroupDao {
-	private static final String POST_URI_V1 = "http://localhost:8181/group/";
+	private static final String GROUP_URI_V1 = "http://localhost:8181/group/";
 	private RestTemplate restTemplate = new RestTemplate();
 
 	@Inject
@@ -23,7 +23,7 @@ public class GroupDaoImpl implements GroupDao {
 
 	@Override
 	public Group getGroupById(long groupId) {
-		ResponseEntity<Group> respone = restTemplate.exchange(POST_URI_V1 + "/{groupId}", HttpMethod.GET, request, Group.class, groupId);
+		ResponseEntity<Group> respone = restTemplate.exchange(GROUP_URI_V1 + "/{groupId}", HttpMethod.GET, request, Group.class, groupId);
 		Group group = respone.getBody();
 		
 		return group;
@@ -31,8 +31,14 @@ public class GroupDaoImpl implements GroupDao {
 
 	@Override
 	public List<User> getGroupMembers(long groupId) {
-		ResponseEntity<User[]> respone = restTemplate.exchange(POST_URI_V1 + "/{groupId}/members", HttpMethod.GET, request, User[].class, groupId);
+		ResponseEntity<User[]> respone = restTemplate.exchange(GROUP_URI_V1 + "/{groupId}/members", HttpMethod.GET, request, User[].class, groupId);
 		return Arrays.asList(respone.getBody());
 	}
-	
+
+	@Override
+	public Group addNewGroup(Group group) {
+		ResponseEntity<Group> response = restTemplate.postForEntity(GROUP_URI_V1, group, Group.class);
+		
+		return response.getBody();
+	}
 }

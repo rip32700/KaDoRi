@@ -38,6 +38,7 @@
 	</ul>
 <br>
 <h1>Groups in KaDoRi</h1>
+<p>(excluding your groups)</p>
 <br>
 <p>
 	<ul>

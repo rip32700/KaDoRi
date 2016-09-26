@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ page session="false"%>
 
+<input type="submit" style="float:right" class="btn btn-warning" onclick="location.href='/my_groups/new_group'" value="Create Group">
+<br>
 <h1>Your Groups:</h1>
 <br>
 <p>

@@ -13,17 +13,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.hsp.kadori.dao.FriendshipDao;
 import com.hsp.kadori.dao.GroupDao;
+import com.hsp.kadori.dao.GroupMemberDao;
 import com.hsp.kadori.dao.PostDao;
 import com.hsp.kadori.dao.UserDao;
 import com.hsp.kadori.dao.impl.FriendshipDaoImpl;
 import com.hsp.kadori.dao.impl.GroupDaoImpl;
+import com.hsp.kadori.dao.impl.GroupMemberDaoImpl;
 import com.hsp.kadori.dao.impl.PostDaoImpl;
 import com.hsp.kadori.dao.impl.UserDaoImpl;
 import com.hsp.kadori.service.FriendsService;
+import com.hsp.kadori.service.GroupMemberService;
 import com.hsp.kadori.service.GroupService;
 import com.hsp.kadori.service.PostService;
 import com.hsp.kadori.service.UserService;
 import com.hsp.kadori.service.impl.FriendsServiceImpl;
+import com.hsp.kadori.service.impl.GroupMemberServiceImpl;
 import com.hsp.kadori.service.impl.GroupServiceImpl;
 import com.hsp.kadori.service.impl.MyUserDetailsService;
 import com.hsp.kadori.service.impl.PostServiceImpl;
@@ -51,6 +55,10 @@ public class RootConfig {
 		return new PostDaoImpl();
 	}
 	
+	@Bean GroupMemberDao groupMemberDao() {
+		return new GroupMemberDaoImpl();
+	}
+	
 	@Bean
 	public UserDao userDao() {
 		return new UserDaoImpl();
@@ -69,6 +77,11 @@ public class RootConfig {
 	@Bean
 	public PostService postService() {
 		return new PostServiceImpl();
+	}
+	
+	@Bean
+	public GroupMemberService groupMemberService() {
+		return new GroupMemberServiceImpl();
 	}
 	
 	@Bean

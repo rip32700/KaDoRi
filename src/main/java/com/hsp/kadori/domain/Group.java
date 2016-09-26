@@ -12,6 +12,13 @@ public class Group {
 		
 	}
 	
+	public Group (Date date, String description, String name) {
+		super();
+		this.date = date;
+		this.groupDescription = description;
+		this.groupName = name;
+	}
+	
 	public Group (Long groupId, Date date, String description, String name) {
 		super();
 		this.groupId = groupId;

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.Post;
 import com.hsp.kadori.domain.User;
+import com.hsp.kadori.dto.GroupDTO;
 import com.hsp.kadori.dto.PostDTO;
+import com.hsp.kadori.service.GroupMemberService;
 import com.hsp.kadori.service.GroupService;
 import com.hsp.kadori.service.PostService;
 import com.hsp.kadori.service.UserService;
@@ -40,6 +43,9 @@ public class GroupController {
 	
 	@Inject
 	GroupService groupService;
+	
+	@Inject
+	GroupMemberService groupMemberService;
 	
 	public GroupController() {
 	}
@@ -97,5 +103,27 @@ public class GroupController {
 	    } else {
 	        return new ModelAndView("group", "groupPostsList", posts);
 	    }
-	}	
+	}
+	
+	@RequestMapping(value="/my_groups/new_group")
+	public ModelAndView loadNewGroupPage(final Model model) {
+		model.addAttribute("groupDTO", new GroupDTO());
+		return new ModelAndView("new_group");
+	}
+	
+	@RequestMapping(value="/my_groups/new_group", method=RequestMethod.POST)
+	public ModelAndView createNewGroup(Model model, @ModelAttribute("groupDTO") @Valid final GroupDTO groupDTO, final BindingResult result, final Errors errors, final HttpServletRequest request) {
+		User loggedInUser = userService.getLoggedInUser();
+		
+		if (result.hasErrors()) {
+	        return new ModelAndView("new_group", "groupDTO", groupDTO);
+	    }
+		
+		groupDTO.setDate(new Date());
+		Group group = groupService.save(groupDTO);
+		
+		groupMemberService.createGroupMember(loggedInUser, group);
+		
+		return new ModelAndView("redirect:/group/"+group.getGroupId());
+	}
 }

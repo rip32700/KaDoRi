@@ -8,4 +8,5 @@ import com.hsp.kadori.domain.User;
 public interface GroupDao {
 	Group getGroupById(long groupId);
 	List<User> getGroupMembers(long groupId);
+	Group addNewGroup(Group group);
 }

@@ -31,7 +31,7 @@
 					
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	
-					<input type="submit" style="margin-top: 20px; width: 100px;" class="btn btn-primary" value="Log in">
+					<input type="submit" style="margin-top: 20px; width: 100px;" class="btn btn-warning" value="Log in">
 
 				</form>
 				<br>

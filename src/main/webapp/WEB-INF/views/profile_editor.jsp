@@ -118,7 +118,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<button style="margin-top: 20px; margin-left: 100px; width: 150px;" class="btn btn-primary" type="submit">Submit</button>
+			<button style="margin-top: 20px; margin-left: 100px; width: 150px;" class="btn btn-warning" type="submit">Submit</button>
 		</div>
 	</div>
 </form:form>

@@ -39,8 +39,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User save(User user) {
-		/* URI uri = */ restTemplate.postForLocation(USER_URI_V1, user);
-		return user;
+		ResponseEntity<User> response = restTemplate.postForEntity(USER_URI_V1, user, User.class);
+		return response.getBody();
 	}
 
 	@Override

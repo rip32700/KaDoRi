@@ -1,21 +1,23 @@
-package com.hsp.kadori.domain;
+package com.hsp.kadori.dto;
 
-public class GroupMember {
-	
+import com.hsp.kadori.domain.Group;
+import com.hsp.kadori.domain.User;
+
+public class GroupMemberDTO {
 	private Long groupMemberId;
 	private Group group;
 	private User user;
 	
-	public GroupMember() {
+	public GroupMemberDTO() {
 	}
 	
-	public GroupMember (Group group, User user) {
+	public GroupMemberDTO (Group group, User user) {
 		super();
 		this.group = group;
 		this.user = user;
 	}
 	
-	public GroupMember (Long groupMemberId, Group group, User user) {
+	public GroupMemberDTO (Long groupMemberId, Group group, User user) {
 		super();
 		this.groupMemberId = groupMemberId;
 		this.group = group;
