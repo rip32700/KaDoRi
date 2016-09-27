@@ -1,6 +1,5 @@
 package com.hsp.kadori.web;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +24,6 @@ import com.hsp.kadori.service.UserService;
 @Controller
 public class HomeController {
 
-	private List<Post> posts = new ArrayList<>();
-	
 	@Inject
 	PostService postService;
 	
@@ -39,7 +36,7 @@ public class HomeController {
 	@RequestMapping(value="/")
 	public ModelAndView home(final Model model) {
 		User user = userService.getLoggedInUser();
-		posts = postService.getPosts(user);
+		List<Post> posts = postService.getPosts(user);
 		
 		model.addAttribute("postsList", posts);
 		model.addAttribute("postDTO", new Post());
@@ -50,6 +47,7 @@ public class HomeController {
 	@RequestMapping(value="/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
 		User user = userService.getLoggedInUser();
+		List<Post> posts = postService.getPosts(user);
 		
 		if (!result.hasErrors() && user != null) {
 			post.setUser(user);

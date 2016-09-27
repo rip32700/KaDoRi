@@ -1,6 +1,7 @@
 package com.hsp.kadori.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -43,6 +44,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<Post> getGroupPosts(long groupId) {
 		 List<Post> postsOfGroup = repository.getPostsOfGroup(groupId);
+		 Collections.reverse(postsOfGroup);
 		
 		return new ArrayList<Post>(postsOfGroup);
 	}

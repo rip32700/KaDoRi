@@ -1,6 +1,5 @@
 package com.hsp.kadori.web;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -32,9 +31,6 @@ import com.hsp.kadori.service.UserService;
 @Controller
 public class GroupController {
 
-	private List<Post> posts = new ArrayList<>();
-	private Group group = null;
-	
 	@Inject
 	PostService postService;
 	
@@ -52,15 +48,13 @@ public class GroupController {
 	
 	@RequestMapping(value="/group/{groupId}")
 	public String loadGroupPage(final Model model, @PathVariable("groupId") long groupId) {
-		this.group = groupService.getGroupById(groupId);
+		Group group = groupService.getGroupById(groupId);
 		model.addAttribute("group", group);
 
 		List<User> groupMembers = groupService.getGroupMembers(groupId);
 		model.addAttribute("groupMembers", groupMembers);
 
-		posts = postService.getGroupPosts(groupId);
-		Collections.reverse(posts);
-		
+		List<Post> posts = postService.getGroupPosts(groupId);
 		model.addAttribute("groupPostsList", posts);
 		model.addAttribute("postDTO", new Post());
 		
@@ -78,17 +72,19 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/group/{groupId}/new_Post", method = RequestMethod.POST)
-	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
+	public ModelAndView newPost(final Model model, @PathVariable("groupId") long groupId, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
+		Group group = groupService.getGroupById(groupId);
 		model.addAttribute("group", group);
 		
-		List<User> groupMembers = groupService.getGroupMembers(group.getGroupId());
+		List<User> groupMembers = groupService.getGroupMembers(groupId);
 		model.addAttribute("groupMembers", groupMembers);
 		
 		User user = userService.getLoggedInUser();
+		List<Post> posts = postService.getGroupPosts(groupId);
 		
 		if (!result.hasErrors() && user != null) {
 			if(group != null) {
-				post.setGroup(this.group);
+				post.setGroup(group);
 			}
 			post.setUser(user);
 			post.setIsPublic(false);
