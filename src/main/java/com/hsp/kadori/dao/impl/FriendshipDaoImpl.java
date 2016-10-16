@@ -3,6 +3,7 @@ package com.hsp.kadori.dao.impl;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import com.hsp.kadori.dao.FriendshipDao;
@@ -17,9 +18,13 @@ public class FriendshipDaoImpl implements FriendshipDao {
 	@Inject
 	HttpEntity<String> request;
 	
+	@Inject
+	HttpHeaders headers;
+	
 	@Override
 	public Friendship save(Friendship friendship) {
-		return restTemplate.postForEntity(FRIENDSHIP_URI_V1, friendship, Friendship.class).getBody();
+		HttpEntity<Object> request = new HttpEntity<>(friendship, headers);
+		return restTemplate.postForEntity(FRIENDSHIP_URI_V1, request, Friendship.class).getBody();
 	}
 
 	@Override

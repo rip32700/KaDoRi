@@ -1,5 +1,6 @@
 package com.hsp.kadori.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -35,8 +36,8 @@ public class ExploreController {
 	@RequestMapping("/explore")
 	public ModelAndView loadExplorePage(Model model) {
 		User loggedInUser = userService.getLoggedInUser();
-		List<User> availableFriends = null;
-		List<Group> availableGroups = null;
+		List<User> availableFriends = new ArrayList<>();
+		List<Group> availableGroups = new ArrayList<>();
 		if(loggedInUser == null) {
 			//TODO: get all users
 		} else {

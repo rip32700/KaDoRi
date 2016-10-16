@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -21,12 +22,13 @@ public class PostDaoImpl implements PostDao {
 	@Inject
 	HttpEntity<String> request;
 	
+	@Inject
+	HttpHeaders headers;
+	
 	@Override
 	public Post save(Post post) {
-//		restTemplate.exchange(POST_URI_V1, HttpMethod.POST, request,
-//				Post[].class, post);
-		restTemplate.postForLocation(POST_URI_V1, post);
-		return post;
+		HttpEntity<Object> request = new HttpEntity<>(post, headers);
+		return restTemplate.postForEntity(POST_URI_V1, request, Post.class).getBody();
 	}
 	
 

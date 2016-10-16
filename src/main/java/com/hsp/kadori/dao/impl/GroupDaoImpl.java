@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -20,6 +21,9 @@ public class GroupDaoImpl implements GroupDao {
 
 	@Inject
 	HttpEntity<String> request;
+	
+	@Inject
+	HttpHeaders headers;
 
 	@Override
 	public Group getGroupById(long groupId) {
@@ -37,8 +41,8 @@ public class GroupDaoImpl implements GroupDao {
 
 	@Override
 	public Group addNewGroup(Group group) {
-		ResponseEntity<Group> response = restTemplate.postForEntity(GROUP_URI_V1, group, Group.class);
-		
+		HttpEntity<Object> request = new HttpEntity<>(group, headers);
+		ResponseEntity<Group> response = restTemplate.postForEntity(GROUP_URI_V1, request, Group.class);
 		return response.getBody();
 	}
 }

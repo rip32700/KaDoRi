@@ -3,6 +3,7 @@ package com.hsp.kadori.dao.impl;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
 
 import com.hsp.kadori.dao.GroupMemberDao;
@@ -16,9 +17,13 @@ public class GroupMemberDaoImpl implements GroupMemberDao {
 	@Inject
 	HttpEntity<String> request;
 	
+	@Inject
+	HttpHeaders headers;
+	
 	@Override
 	public GroupMember save(GroupMember gm) {
-		return restTemplate.postForEntity(GROUP_MEMBER_URI_V1, gm, GroupMember.class).getBody();
+		HttpEntity<Object> request = new HttpEntity<>(gm, headers);
+		return restTemplate.postForEntity(GROUP_MEMBER_URI_V1, request, GroupMember.class).getBody();
 	}
 
 }

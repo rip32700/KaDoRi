@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +22,9 @@ public class UserDaoImpl implements UserDao {
 
 	@Inject
 	HttpEntity<String> request;
+	
+	@Inject
+	HttpHeaders headers;
 
 	@Override
 	public User findUserById(Long userId) {
@@ -39,7 +43,8 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User save(User user) {
-		ResponseEntity<User> response = restTemplate.postForEntity(USER_URI_V1, user, User.class);
+		HttpEntity<Object> request = new HttpEntity<>(user, headers);
+		ResponseEntity<User> response = restTemplate.postForEntity(USER_URI_V1, request, User.class);
 		return response.getBody();
 	}
 

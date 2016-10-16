@@ -1,5 +1,7 @@
 package com.hsp.kadori.config;
 
+import java.util.Arrays;
+
 import javax.sql.DataSource;
 
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -7,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -114,5 +117,18 @@ public class RootConfig {
 		headers.add("Authorization", "Basic "+base64Creds);
 		
 		return new HttpEntity<String>(headers);
+	}
+	
+	@Bean
+	public HttpHeaders httpHeaders() {
+		String plainCreds = "ADMIN:admin";
+		byte[] plainCredsBytes = plainCreds.getBytes();
+		byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
+		String base64Creds = new String(base64CredsBytes);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Basic "+base64Creds);
+		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		
+		return headers;
 	}
 }

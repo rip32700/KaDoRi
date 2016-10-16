@@ -7,7 +7,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.hsp.kadori.dao.PostDao;
-import com.hsp.kadori.domain.Group;
 import com.hsp.kadori.domain.Post;
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.dto.PostDTO;
