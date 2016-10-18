@@ -18,6 +18,7 @@ public class GroupMemberServiceImpl implements GroupMemberService{
 		return repository.save(new GroupMember(group, user));
 	}
 	
+	@Override
 	public void removeGroupMember(User user, Group group) {
 		repository.delete(new GroupMember(group, user));
 	}

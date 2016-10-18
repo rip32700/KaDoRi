@@ -84,7 +84,8 @@ public class ProfileController {
 		if (result.hasErrors()) {
 	        return new ModelAndView("edit_profile", "userDTO", user);
 	    }
-
+		
+		userService.updateUserAccount(user);
 		return new ModelAndView("redirect:/profile/my_profile");
 	}
 	

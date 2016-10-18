@@ -130,4 +130,23 @@ public class GroupController {
 		
 		return new ModelAndView("redirect:/group/"+group.getGroupId());
 	}
+
+	
+	@RequestMapping(value="/group/{groupId}/join_group")
+	public ModelAndView joinGroup(final Model model, @PathVariable("groupId") long groupId) {
+		Group group = groupService.getGroupById(groupId);
+		User currentUser = userService.getLoggedInUser();
+		
+		groupMemberService.createGroupMember(currentUser, group);
+		return new ModelAndView("redirect:/group/" + groupId);
+	}
+	
+	@RequestMapping(value="/group/{groupId}/leave_group")
+	public ModelAndView leaveGroup(final Model model, @PathVariable("groupId") long groupId) {
+		Group group = groupService.getGroupById(groupId);
+		User currentUser = userService.getLoggedInUser();
+		
+		groupMemberService.removeGroupMember(currentUser, group);
+		return new ModelAndView("redirect:/my_groups");
+	}
 }

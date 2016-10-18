@@ -27,7 +27,8 @@ public class GroupMemberDaoImpl implements GroupMemberDao {
 	}
 	
 	public void delete(GroupMember gm) {
-		restTemplate.postForEntity(GROUP_MEMBER_URI_V1 + "delete", gm, GroupMember.class);
+		HttpEntity<Object> request = new HttpEntity<>(gm, headers);
+		restTemplate.postForEntity(GROUP_MEMBER_URI_V1 + "delete", request, GroupMember.class);
 	}
 
 }
