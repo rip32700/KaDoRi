@@ -73,6 +73,11 @@ public class UserServiceImpl implements UserService {
         
         return repository.save(user);
 	}
+	
+	@Override
+	public void deleteUserAccount(Long userId) {
+		repository.delete(userId);
+	}
 
 	private boolean emailExists(String email) {
 		User user = repository.findByEmail(email);

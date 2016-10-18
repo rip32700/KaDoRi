@@ -56,6 +56,7 @@
 			    <c:when test="${currentUser.equals(user)}">
 			       <div class="row">
 			       		<button type="button" class="btn btn-warning" onclick="location.href='/profile/edit_profile'">Edit profile data</button>
+			       		<button type="button" class="btn btn-warning" onclick="location.href='/profile/my_profile/delete'">Delete profile</button>
 			       </div>
 			    </c:when>
 			    <c:when test="${isFriend.equals(true)}">

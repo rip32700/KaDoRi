@@ -47,6 +47,12 @@ public class UserDaoImpl implements UserDao {
 		ResponseEntity<User> response = restTemplate.postForEntity(USER_URI_V1, request, User.class);
 		return response.getBody();
 	}
+	
+	@Override
+	public void delete(final long userId) {
+		HttpEntity<Object> request = new HttpEntity<>(userId, headers);
+		restTemplate.postForEntity(USER_URI_V1 + "delete", request, User.class);
+	}
 
 	@Override
 	public User findByEmail(String email) {

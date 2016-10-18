@@ -13,6 +13,7 @@ public interface UserService {
 
 	User registerNewUserAccount(final UserDTO user);
 	User updateUserAccount(final UserDTO user);
+	void deleteUserAccount(Long userId);
 	User getLoggedInUser();
 	List<Group> getGroups(User user);
 	User getUserById(long userId);
