@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.hsp.kadori.domain.User;
 import com.hsp.kadori.service.FriendsService;
@@ -25,11 +26,15 @@ public class FriendsController {
 	}
 	
 	@RequestMapping(value="/my_friends")
-	public String myFriendsPage(final Model model) {
+	public ModelAndView myFriendsPage(final Model model) {
 		User loggedInUser = userService.getLoggedInUser();
+		if (loggedInUser.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/login");
+		}
+		
 		List<User> friends = friendsService.getAllFriends(loggedInUser);
 		model.addAttribute("friendsList", friends);
 		
-		return "my_friends";
+		return new ModelAndView("my_friends");
 	}
 }

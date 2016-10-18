@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +14,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.hsp.kadori.domain.Post;
@@ -21,8 +23,8 @@ import com.hsp.kadori.dto.PostDTO;
 import com.hsp.kadori.service.PostService;
 import com.hsp.kadori.service.UserService;
 
-@Controller
-public class HomeController {
+@RestController
+public class HomeController implements ErrorController {
 
 	@Inject
 	PostService postService;
@@ -31,6 +33,19 @@ public class HomeController {
 	UserService userService;
 	
 	public HomeController() {
+	}
+
+	
+	private static final String PATH = "/error";
+	
+	@RequestMapping(value = PATH)
+	public ModelAndView error() {
+		return new ModelAndView("error");
+	}
+	
+	@Override
+	public String getErrorPath() {
+		return PATH;
 	}
 	
 	@RequestMapping(value="/")
@@ -46,11 +61,11 @@ public class HomeController {
 	
 	@RequestMapping(value="/new_Post", method = RequestMethod.POST)
 	public ModelAndView newPost(final Model model, @ModelAttribute("postDTO") PostDTO post, final BindingResult result, final Errors errors, final HttpServletRequest request) {
-		User user = userService.getLoggedInUser();
-		List<Post> posts = postService.getPosts(user);
+		User loggedInUser = userService.getLoggedInUser();
+		List<Post> posts = postService.getPosts(loggedInUser);
 		
-		if (!result.hasErrors() && user != null) {
-			post.setUser(user);
+		if (!result.hasErrors() && loggedInUser != null) {
+			post.setUser(loggedInUser);
 			post.setCreationTime(new Date());
 			Post newPost = postService.addNewPost(post);
 			

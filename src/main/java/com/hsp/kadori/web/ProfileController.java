@@ -32,37 +32,33 @@ public class ProfileController {
 	
 	@RequestMapping(value="/profile/my_profile")
 	public ModelAndView loadProfilePage(final Model model) {
-		User user = userService.getLoggedInUser();
-		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
-			return new ModelAndView("redirect:/register");
+		User loggedInUser = userService.getLoggedInUser();
+		if (loggedInUser.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/login");
 		}
 		
-		model.addAttribute("currentUser", user);
-		model.addAttribute("user", user);
+		model.addAttribute("currentUser", loggedInUser);
+		model.addAttribute("user", loggedInUser);
 		
 		return new ModelAndView("profile");
 	}
 	
 	@RequestMapping(value="/profile/{username}")
 	public ModelAndView loadProfilePage(final Model model, @PathVariable("username") String userName) {
-		User user = userService.getUserByName(userName);
-		User currentUser = userService.getLoggedInUser();
-		List<User> allFriends = friendsService.getAllFriends(currentUser);
+		User profileUser = userService.getUserByName(userName);
+		User loggedInUser = userService.getLoggedInUser();
+		if (loggedInUser.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/login");
+		}
+		
+		List<User> allFriends = friendsService.getAllFriends(loggedInUser);
 		boolean isFriend = false;
-		if(allFriends.contains(user)) {
+		if(allFriends.contains(profileUser)) {
 			isFriend = true;
 		}
-		
-		if(user == null) {
-			return new ModelAndView("redirect:/");
-		}
-		
-		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
-			return new ModelAndView("redirect:/register");
-		}
-		
-		model.addAttribute("currentUser", currentUser);
-		model.addAttribute("user", user);
+
+		model.addAttribute("currentUser", loggedInUser);
+		model.addAttribute("user", profileUser);
 		model.addAttribute("isFriend", isFriend);
 		
 		return new ModelAndView("profile");
@@ -70,12 +66,12 @@ public class ProfileController {
 	
 	@RequestMapping(value="/profile/edit_profile", method=RequestMethod.GET)
 	public ModelAndView showEditProfileForm(final Model model) {
-		User user = userService.getLoggedInUser();
-		if (user.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
-			return new ModelAndView("redirect:/register");
+		User loggedInUser = userService.getLoggedInUser();
+		if (loggedInUser.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/login");
 		}
 
-		model.addAttribute("userDTO", new UserDTO(user.getUserId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getEmail(), user.getPassword(), user.getPassword(), user.getType(), user.getBirthday(), user.getStreet(), user.getStreetNumber(), user.getCity(), user.getZip()));
+		model.addAttribute("userDTO", new UserDTO(loggedInUser));
 		return new ModelAndView("edit_profile");
 	}
 	
@@ -92,6 +88,10 @@ public class ProfileController {
 	@RequestMapping(value="/profile/{username}/add_friend")
 	public ModelAndView addAsFriend(Model model, @PathVariable("username") String userName) {
 		User loggedInUser = userService.getLoggedInUser();
+		if (loggedInUser.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/login");
+		}
+		
 		User otherUser = userService.getUserByName(userName);
 		
 		List<User> allFriends = friendsService.getAllFriends(loggedInUser);
@@ -100,8 +100,8 @@ public class ProfileController {
 			//TODO Error-Handling
 			return new ModelAndView("home");
 		}
-		friendsService.addFriendship(loggedInUser, otherUser);
 		
+		friendsService.addFriendship(loggedInUser, otherUser);
 		return new ModelAndView("friendshipSuccess");
 	}
 	
@@ -114,8 +114,11 @@ public class ProfileController {
 	@RequestMapping(value="/profile/{username}/remove_friend")
 	public ModelAndView removeAsFriend(Model model, @PathVariable("username") String userName) {
 		User loggedInUser = userService.getLoggedInUser();
-		User otherUser = userService.getUserByName(userName);
+		if (loggedInUser.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/login");
+		}
 		
+		User otherUser = userService.getUserByName(userName);
 		friendsService.removeFriendship(loggedInUser, otherUser);
 		
 		return new ModelAndView("redirect:/my_friends");

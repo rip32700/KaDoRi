@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.hsp.kadori.domain.User;
+
 public class UserDTO {
 
 	private Long userId;
@@ -36,7 +38,6 @@ public class UserDTO {
 	@NotEmpty
 	private String type;
 	
-	//@DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss.SSSZ")
 	@NotNull
 	@NotEmpty
 	private String birthday;
@@ -54,7 +55,6 @@ public class UserDTO {
 	private Integer zip;
 	
 	public UserDTO() {
-		
 	}
 	
 	public UserDTO(String firstName, String lastName, String username, String email, String password,
@@ -75,23 +75,21 @@ public class UserDTO {
 		this.zip = zip;
 	}
 	
-	public UserDTO(Long userId, String firstName, String lastName, String username, String email, String password,
-			String matchingPassword, String type, String birthday, String street, Integer streetNumber, String city,
-			Integer zip) {
+	public UserDTO(User user) {
 		super();
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.username = username;
-		this.email = email;
-		this.password = password;
-		this.matchingPassword = matchingPassword;
-		this.type = type;
-		this.birthday = birthday;
-		this.street = street;
-		this.streetNumber = streetNumber;
-		this.city = city;
-		this.zip = zip;
+		this.userId = user.getUserId();
+		this.firstName = user.getFirstname();
+		this.lastName = user.getLastname();
+		this.username = user.getUsername();
+		this.email = user.getEmail();
+		this.password = user.getPassword();
+		this.matchingPassword = user.getPassword();
+		this.type = user.getType();
+		this.birthday = user.getBirthday();
+		this.street = user.getStreet();
+		this.streetNumber = user.getStreetNumber();
+		this.city = user.getCity();
+		this.zip = user.getZip();
 	}
 
 	public String getBirthday() {

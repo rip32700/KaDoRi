@@ -21,8 +21,6 @@ import com.hsp.kadori.service.UserService;
 
 @Controller
 public class RegistrationController {
-
-	
 	@Inject 
 	private UserService service;
 	
@@ -34,14 +32,10 @@ public class RegistrationController {
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	public ModelAndView registerUser(@ModelAttribute("userDTO") @Valid final UserDTO user, final BindingResult result, final Errors errors, final HttpServletRequest request) {
-		
 		User registered = new User();
 		
 		if (!result.hasErrors()) {
 	        registered = createUserAccount(user, result);
-	    }
-		if (registered == null) {
-	       // result.rejectValue("email", "message.regError");
 	    }
 	    if (result.hasErrors()) {
 	        return new ModelAndView("registration", "userDTO", user);
