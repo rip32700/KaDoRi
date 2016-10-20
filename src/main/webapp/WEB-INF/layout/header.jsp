@@ -16,7 +16,9 @@
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li>
-				<li><a href="/explore">Explore</a></li>
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="/explore">Explore</a></li>
+				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li><a href="<c:url value="/my_friends" />">My Friends</a></li>
 				</sec:authorize>

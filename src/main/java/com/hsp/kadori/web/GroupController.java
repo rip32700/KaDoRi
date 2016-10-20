@@ -47,7 +47,12 @@ public class GroupController {
 	}
 	
 	@RequestMapping(value="/group/{groupId}")
-	public String loadGroupPage(final Model model, @PathVariable("groupId") long groupId) {
+	public ModelAndView loadGroupPage(final Model model, @PathVariable("groupId") long groupId) {
+		User loggedInUser = userService.getLoggedInUser();
+		if (loggedInUser.getEmail().equals("anonymousUser@ADManonymousUser.de")) {
+			return new ModelAndView("redirect:/login");
+		}
+		
 		Group group = groupService.getGroupById(groupId);
 		List<Group> allUserGroups = userService.getGroups(userService.getLoggedInUser());
 		boolean isInGroup = allUserGroups.stream().anyMatch(x -> x.getGroupId().equals(groupId));
@@ -62,7 +67,7 @@ public class GroupController {
 		model.addAttribute("groupPostsList", posts);
 		model.addAttribute("postDTO", new Post());
 		
-		return "group";
+		return new ModelAndView("group");
 	}
 	
 	@RequestMapping(value="/my_groups")
