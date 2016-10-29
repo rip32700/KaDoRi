@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
     
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
     	http.authorizeRequests()
         .antMatchers("/", "/home").permitAll()
