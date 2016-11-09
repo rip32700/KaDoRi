@@ -46,20 +46,20 @@ public class UserDTO {
 	@NotEmpty
 	private String street;
 	
-	private Integer streetNumber;
+	private String streetNumber;
 	
 	@NotNull
 	@NotEmpty
 	private String city;
 	
-	private Integer zip;
+	private String zip;
 	
 	public UserDTO() {
 	}
 	
 	public UserDTO(String firstName, String lastName, String username, String email, String password,
-			String matchingPassword, String type, String birthday, String street, Integer streetNumber, String city,
-			Integer zip) {
+			String matchingPassword, String type, String birthday, String street, String streetNumber, String city,
+			String zip) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -153,11 +153,11 @@ public class UserDTO {
 		this.street = street;
 	}
 
-	public Integer getStreetNumber() {
+	public String getStreetNumber() {
 		return streetNumber;
 	}
 
-	public void setStreetNumber(Integer streetNumber) {
+	public void setStreetNumber(String streetNumber) {
 		this.streetNumber = streetNumber;
 	}
 
@@ -169,11 +169,11 @@ public class UserDTO {
 		this.city = city;
 	}
 
-	public Integer getZip() {
+	public String getZip() {
 		return zip;
 	}
 
-	public void setZip(Integer zip) {
+	public void setZip(String zip) {
 		this.zip = zip;
 	}
 	

@@ -17,7 +17,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">First Name: </label> 
-				<form:input class="form-control registration-form-input-field" path="firstName" value="" required="true" placeholder="Your First Name..."/>
+				<form:input class="form-control registration-form-input-field" path="firstName" value="" maxlength="45" required="true" placeholder="Your First Name..."/>
 				<form:errors path="firstName" element="div" cssClass="error"/>
 			</div>
 		</div>
@@ -26,7 +26,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">Last Name: </label>
-				<form:input class="form-control registration-form-input-field" path="lastName" value="" required="true" placeholder="Your Last Name..."/>
+				<form:input class="form-control registration-form-input-field" path="lastName" maxlength="45" value="" required="true" placeholder="Your Last Name..."/>
 				<form:errors path="lastName" element="div" cssClass="error" />
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">Username: </label>
-				<form:input class="form-control registration-form-input-field" path="username" value="" required="true" placeholder="Your username..."/>
+				<form:input class="form-control registration-form-input-field" path="username" maxlength="45" value="" required="true" placeholder="Your username..."/>
 				<form:errors path="username" element="div" cssClass="error"/>
 			</div>
 		</div>
@@ -44,7 +44,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">Email: </label>
-				<form:input class="form-control registration-form-input-field" path="email" value="" required="true" placeholder="Your E-Mail address..."/>
+				<form:input class="form-control registration-form-input-field" type="email" path="email" maxlength="45" value="" required="true" placeholder="Your E-Mail address..."/>
 				<form:errors path="email" element="div" cssClass="error" />
 			</div>
 		</div>
@@ -53,7 +53,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">Password: </label>
-				<form:input class="form-control registration-form-input-field" path="password" value="" type="password" required="true" placeholder="Your password..."/>
+				<form:input class="form-control registration-form-input-field" path="password" maxlength="45" value="" type="password" required="true" placeholder="Your password..."/>
 				<form:errors path="password" element="div" cssClass="error" />
 			</div>
 		</div>
@@ -62,7 +62,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">Confirm Password: </label>
-				<form:input class="form-control registration-form-input-field" path="matchingPassword" value="" type="password" required="true" placeholder="Repeat your password..."/>
+				<form:input class="form-control registration-form-input-field" path="matchingPassword" maxlength="45" value="" type="password" required="true" placeholder="Repeat your password..."/>
 				<form:errors path="matchingPassword" element="div" cssClass="error" />
 			</div>
 		</div>
@@ -84,7 +84,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">Street: </label>
-				<form:input class="form-control registration-form-input-field" path="street" value="" required="true" placeholder="Your Street Name..."/>
+				<form:input class="form-control registration-form-input-field" path="street" maxlength="45" value="" required="true" placeholder="Your Street Name..."/>
 				<form:errors path="street" element="div" cssClass="error" />
 			</div>
 		</div>
@@ -93,7 +93,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">Street Number: </label>
-				<form:input class="form-control registration-form-input-field" path="streetNumber" required="true" placeholder="Your Street Number..."/>
+				<form:input class="form-control registration-form-input-field" path="streetNumber" maxlength="10" required="true" placeholder="Your Street Number..."/>
 				<form:errors path="streetNumber" element="div" cssClass="error" />
 			</div>
 		</div>
@@ -102,7 +102,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">City: </label>
-				<form:input class="form-control registration-form-input-field" path="city" value="" required="true" placeholder="Your City Name..."/>
+				<form:input class="form-control registration-form-input-field" maxlength="45" path="city" value="" required="true" placeholder="Your City Name..."/>
 				<form:errors path="city" element="div" cssClass="error" />
 			</div>
 		</div>
@@ -111,7 +111,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="form-group">
 				<label class="registration-form-label">ZIP: </label>
-				<form:input class="form-control registration-form-input-field" path="zip" required="true" placeholder="Your ZIP code..."/>
+				<form:input class="form-control registration-form-input-field" path="zip" maxlength="10" required="true" placeholder="Your ZIP code..."/>
 				<form:errors path="zip" element="div" cssClass="error" />
 			</div>
 		</div>
